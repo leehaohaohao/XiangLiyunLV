@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #F5F5DC;
+                /* 米色 */
+            }
+
+            .community-nav {
+                display: flex;
+                justify-content: space-around;
+                background-color: #556B2F;
+                /* 深橄榄绿 */
+                color: #F5F5DC;
+                /* 米色 */
+                padding: 10px 0;
+            }
+
+            .community-nav div {
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .community-nav .selected {
+                background-color: #8FBC8F;
+                /* 深海绿 */
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+
+            .post {
+                width:1400px;
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                border: 1px solid #000;
+                /* 添加边框 */
+                padding: 10px;
+                /* 添加内边距 */
+                margin-bottom: 10px;
+                /* 添加外边距 */
+                background-color: #F0E68C;
+                /* 卡其色 */
+                border: 1px solid #556B2F;
+                /* 深橄榄绿 */
+            }
+
+            .avatar {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+                background-color: #6B8E23;
+                /* 橄榄绿 */
+            }
+
+            .post-content {
+                width: 100%;
+            }
+
+            .post-text {
+                margin-bottom: 10px;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: flex-start;
+                margin-bottom: 10px;
+            }
+
+            .action {
+                margin-right: 10px;
+                cursor: pointer;
+            }
+
+            .actions .liked {
+                color: #FF4500;
+                /* 橙红色 */
+            }
+
+            .actions .favorited {
+                color: #FFD700;
+                /* 金色 */
+            }
+
+            .post-icon {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            .post-window {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                display: none;
+                background-color: #F0E68C;
+                /* 卡其色 */
+                border: 1px solid #556B2F;
+                /* 深橄榄绿 */
+                padding: 20px;
+
+                width: 80%;
+                height: 80%;
+                overflow: auto;
+            }
+
+            .post-input {
+                width: 100%;
+                height: 60%;
+                margin-bottom: 10px;
+            }
+
+            .file-input {
+                display: none;
+            }
+
+            .image-upload {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                /* 添加这一行 */
+            }
+
+            .file-label {
+                display: inline-block;
+                width: 200px;
+                height: 200px;
+                background-color: #f0f0f0;
+                line-height: 200px;
+                text-align: center;
+                font-size: 50px;
+                cursor: pointer;
+                order: 2;
+            }
+
+            .preview-image {
+                max-width: 100%;
+                max-height: 200px;
+                margin-bottom: 10px;
+            }
+
+            .post img {
+                max-width: 100%;
+                max-height: 200px;
+                margin-bottom: 10px;
+            }
+
+            .post-window-buttons {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .comment-section {
+                position: fixed;
+                right: 0;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                overflow: auto;
+                background-color: #F5F5DC;
+                /* 米色 */
+                padding: 20px;
+                display: none;
+            }
+
+            .comment {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
+            }
+
+            .comment-avatar {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+                background-color: #123456;
+            }
+
+            .comment-content {
+                width: 100%;
+            }
+
+            .comment-text {
+                margin-bottom: 10px;
+            }
+
+            .comment-info {
+                display: flex;
+                justify-content: space-between;
+                font-size: 12px;
+                color: #888;
+            }
+        </style>
+        <script>
+            function enterPrivateCommunity() {
+                var code = prompt("请输入私人社区号码：");
+                if (code == "111") {
+                    document.getElementById('public-community').classList.remove('selected');
+                    document.getElementById('private-community').classList.add('selected');
+                    document.getElementById('public-content').style.display = 'none';
+                    document.getElementById('private-content').style.display = 'block';
+                } else {
+                    alert("号码错误！");
+                }
+            }
+
+            function enterPublicCommunity() {
+                document.getElementById('public-community').classList.add('selected');
+                document.getElementById('private-community').classList.remove('selected');
+                document.getElementById('public-content').style.display = 'block';
+                document.getElementById('private-content').style.display = 'none';
+            }
+
+            function openPostWindow() {
+                document.getElementById('post-window').style.display = 'block';
+                document.getElementById('post-input').value = '';
+                document.getElementById('file-input').value = '';
+                document.getElementById('preview-images').innerHTML = '';
+            }
+
+            function closePostWindow() {
+                document.getElementById('post-window').style.display = 'none';
+            }
+
+            function postContent() {
+                var content = document.getElementById('post-input').value;
+                var community = document.getElementById('public-community').classList.contains('selected') ?
+                    'public-content' : 'private-content';
+                var post = document.createElement('div');
+                post.className = 'post';
+                post.innerHTML = `
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>新用户</h2>
+                    <p class="post-text">${content}</p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                                                <span class="action" onclick="openCommentSection()">评论</span>
+                                            </div>
+                                        </div>
+                                    `;
+                var fileInput = document.getElementById('file-input');
+                if (fileInput.files.length > 0) {
+                    Array.from(fileInput.files).forEach(function(file) { // 遍历所有选中的文件
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            post.querySelector('.post-content').insertBefore(img, post.querySelector(
+                                '.actions'));
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+                document.getElementById(community).appendChild(post);
+                closePostWindow();
+            }
+
+            function previewImages() {
+                var fileInput = document.getElementById('file-input');
+                var previewContainer = document.getElementById('preview-images');
+                previewContainer.innerHTML = ''; // 清空预览容器
+                if (fileInput.files.length > 0) {
+                    Array.from(fileInput.files).forEach(function(file) { // 遍历所有选中的文件
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'preview-image';
+                            previewContainer.appendChild(img); // 将预览图片添加到容器中
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+
+            function toggleLike(event) {
+                event.target.classList.toggle('liked');
+            }
+
+            function toggleFavorite(event) {
+                event.target.classList.toggle('favorited');
+            }
+
+            function openCommentSection() {
+                document.getElementById('comment-section').style.display = 'block';
+            }
+
+            function closeCommentSection() {
+                document.getElementById('comment-section').style.display = 'none';
+            }
+
+            function postComment() {
+                var commentText = document.getElementById('comment-input').value;
+                if (commentText) {
+                    var comment = document.createElement('div');
+                    comment.className = 'comment';
+                    comment.innerHTML = `
+                        <div class="comment-avatar"></div>
+                        <div class="comment-content">
+                            <h2>新用户</h2>
+                            <p class="comment-text">${commentText}</p>
+                            <div class="comment-info">
+                                <span>${new Date().toLocaleString()}</span>
+                                <span>192.168.1.1</span>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('comment-section').appendChild(comment);
+                    document.getElementById('comment-input').value = '';
+                } else {
+                    alert('请输入评论内容！');
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="community-nav">
+            <div id="private-community" onclick="enterPrivateCommunity()">私人社区</div>
+            <div id="public-community" class="selected" onclick="enterPublicCommunity()">公开社区</div>
+        </div>
+        <div class="content-area" id="public-content">
+            <div class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>张三</h2>
+                    <p class="post-text">这是张三在公开社区发布的一些文本内容。</p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                        <span class="action" onclick="openCommentSection()">评论</span>
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>李四</h2>
+                    <p class="post-text">这是李四在公开社区发布的一些文本内容。</p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                        <span class="action" onclick="openCommentSection()">评论</span>
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>农业新闻</h2>
+                    <img src="农业新闻图片的URL" alt="农业新闻图片">
+                    <p class="post-text">
+                        近日，我国农业科研人员成功研发出一种新型的抗旱水稻品种。这种水稻在干旱条件下也能正常生长，对我国农业生产具有重要意义。据悉，这种水稻将在未来几年内推广到全国各地，有望极大提高我国农业生产效率和粮食产量。
+                    </p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                        <span class="action" onclick="openCommentSection()">评论</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content-area" id="private-content" style="display: none;">
+            <div class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>王五</h2>
+                    <p class="post-text">这是王五在私人社区发布的一些文本内容。</p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                        <span class="action" onclick="openCommentSection()">评论</span>
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <h2>赵六</h2>
+                    <p class="post-text">这是赵六在私人社区发布的一些文本内容。</p>
+                    <div class="actions">
+                        <span class="action" onclick="toggleLike(event)">点赞</span>
+                        <span class="action" onclick="toggleFavorite(event)">收藏</span>
+                        <span class="action" onclick="openCommentSection()">评论</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-icon" onclick="openPostWindow()">+</div>
+        <div class="post-window" id="post-window">
+            <textarea id="post-input" class="post-input"></textarea>
+            <div class="image-upload">
+                <div id="preview-images"></div> <!-- 预览图片的容器 -->
+                <label for="file-input" class="file-label">+</label>
+            </div>
+            <input id="file-input" class="file-input" type="file" accept="image/*,video/*" onchange="previewImages()"
+                multiple> <!-- 添加 multiple 属性 -->
+            <div class="post-window-buttons">
+                <button onclick="postContent()">发表</button>
+                <button onclick="closePostWindow()">取消</button>
+            </div>
+        </div>
+        <div class="comment-section" id="comment-section">
+            <div class="comment">
+                <div class="comment-avatar"></div>
+                <div class="comment-content">
+                    <h2>新用户</h2>
+                    <p class="comment-text">这是新用户的评论。</p>
+                    <div class="comment-info">
+                        <span>2024-02-18 14:11:10</span>
+                        <span>安徽</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多评论 -->
+            <button onclick="closeCommentSection()">关闭评论区</button>
+            <div class="comment-input-area">
+                <textarea id="comment-input" class="comment-input"></textarea>
+                <button onclick="postComment()">发送</button>
+            </div>
+            <!-- 这里是你的评论 -->
+        </div>
+    </body>
+</html>

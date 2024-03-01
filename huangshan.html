@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>黄山详情介绍</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+        
+            .container {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+        
+            .slider {
+                width: 100%;
+                height: 400px;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+        
+            .slider img {
+                display: none;
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+            }
+        
+            .slider img:first-child {
+                display: block;
+            }
+        
+            .description {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                font-size: 1.2em;
+                line-height: 1.6em;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+        
+            .visit-button {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin-top: 20px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                font-size: 1.2em;
+                box-sizing: border-box; /* 添加这一行 */
+            }
+        
+        
+            .tags-section {
+                margin-top: 20px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+        
+            .tags-title {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+        
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        
+            .tag {
+                padding: 5px 10px;
+                background-color: #007BFF;
+                color: #fff;
+                border-radius: 3px;
+            }
+        
+            .comments-section {
+                margin-top: 20px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+        
+            .comments-title {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+        
+            .rating {
+                color: #f4c150;
+                margin-left: 10px;
+            }
+        
+            .comments {
+                margin-top: 20px;
+            }
+        
+            .comment {
+                display: flex;
+                align-items: start;
+                border-bottom: 1px solid #ddd;
+                padding: 10px 0;
+            }
+        
+            .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #ddd;
+                margin-right: 10px;
+            }
+        
+            .comment-content {
+                flex: 1;
+            }
+        
+            .comment-name {
+                font-weight: bold;
+            }
+        
+            .comment-text {
+                margin: 5px 0;
+            }
+        
+            .comment-date {
+                align-self: flex-end;
+                font-size: 0.8em;
+                color: #888;
+            }
+        
+            .comment-input {
+                margin-top: 20px;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-sizing: border-box; /* 添加这一行 */
+            }
+        
+        
+            .submit-button {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                font-size: 1.2em;
+            }
+        
+            .rating-section {
+                margin-top: 20px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+        
+            .rating-title {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+        
+            .rating {
+                color: #f4c150;
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="slider">
+                <img src="img/huangshan.jpg" alt="Image 1">
+                <img src="img/huangshan1.jpg" alt="Image 2">
+                <img src="img/huangshan2.jpg" alt="Image 3">
+                <img src="img/huangshan3.jpg" alt="Image 4">
+            </div>
+            <div class="description">
+                黄山，位于中国安徽省南部，是中国著名的风景旅游区和世界文化与自然双重遗产。黄山以奇松、怪石、云海、温泉、冬雪“五绝”著称于世，被誉为“登黄山，天下无山，观止矣！”
+            </div>
+            <a href="#" class="visit-button">参观</a>
+            <div class="tags-section">
+                <div class="tags-title">标签</div>
+                <div class="tags">
+                    <div class="tag">自然风光</div>
+                    <div class="tag">历史悠久</div>
+                    <div class="tag">文化遗产</div>
+                    <div class="tag">1000元以上</div>
+                </div>
+            </div>
+            <div class="rating-section">
+                <div class="rating-title">景区评级<span class="rating">⭐⭐⭐⭐</span></div>
+            </div>
+            <div class="comments-section">
+                <div class="comments-title">评论区</div>
+                <div class="comments">
+                    <div class="comment">
+                        <div class="avatar"></div>
+                        <div class="comment-content">
+                            <div class="comment-name">游客A</div>
+                            <div class="comment-text">黄山真是太美了，我已经迫不及待想要再去一次！</div>
+                            <div class="comment-date">2024-02-01</div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="avatar"></div>
+                        <div class="comment-content">
+                            <div class="comment-name">游客B</div>
+                            <div class="comment-text">我在黄山度过了一个难忘的周末，景色令人震撼。</div>
+                            <div class="comment-date">2024-02-02</div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" class="comment-input" placeholder="在这里发表你的评论...">
+                <button class="submit-button">提交评论</button>
+            </div>
+        </div>
+        <script>
+            var slider = $(".slider");
+            var images = slider.find("img");
+            var index = 0;
+            var interval = 3000;
+
+            function switchImage() {
+                images.hide();
+                images.eq(index).show();
+                index++;
+                if (index == images.length) {
+                    index = 0;
+                }
+            }
+
+            switchImage();
+            setInterval(switchImage, interval);
+
+            $('.submit-button').click(function() {
+                var commentText = $('.comment-input').val();
+                if (commentText) {
+                    var commentHTML =
+                        '<div class="comment"><div class="avatar"></div><div class="comment-content"><div class="comment-name">游客C</div><div class="comment-text">' +
+                        commentText + '</div><div class="comment-date">2024-02-28</div></div></div>';
+                    $('.comments').append(commentHTML);
+                    $('.comment-input').val('');
+                } else {
+                    alert('请输入评论内容！');
+                }
+            });
+        </script>
+    </body>
+</html>

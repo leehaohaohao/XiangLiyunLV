@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+	<title>乡村购物</title>
+	<meta charset="utf-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <head>
+        <style type="text/css">
+        	body,html{
+        		margin: 0;
+				height:100%;
+				width: 100%;
+        	}
+        	ul,li{
+                list-style: none;
+                font-size: 19px;
+                height: 30px;
+                font-family: '宋体';
+                font-weight: bold;
+                padding: 12px 0;
+                text-align: center;
+            }
+            a{
+                text-decoration: none;
+                color: inherit;
+        	}
+        	
+            .row {
+            	height: calc(100% - 80px);
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                
+                /* 设置高度为视口的100% */
+            }
+
+            .column {
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+            }
+			.column_list{
+                color: #0e6d0c;
+                height: 22px;
+                border-bottom: 1px solid #00487B;
+                padding: 12px 0;
+			}
+            .nav {
+                width: 15%;
+                /* 缩小导航栏的宽度 */
+                overflow: auto;
+                background-color: #d2e7df;
+                /* 添加滚动条 */
+            }
+
+            .products {
+                width: 50%;
+                /* 增大商品列的宽度 */
+                overflow: auto;
+                background-color: #f5f5f5;
+                /* 添加滚动条 */
+            }
+
+            .cart {
+                width: 30%;
+                /* 保持购物车列的宽度不变 */
+                display: flex;
+                flex-direction: column;
+                background-color: #fff;
+            }
+
+            .product {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid black;
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .product > div {
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+			.product>button{
+				font-size: 19px;
+				width: 30px;
+			}
+            .cart-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid #ddd;
+                margin: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+                width: 200px; /* 调整为你需要的宽度 */
+                height: 200px; /* 调整为你需要的高度 */
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+            
+            .cart-icon {
+                width: 100px; /* 调整为你需要的宽度 */
+                height: 100px; /* 调整为你需要的高度 */
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+            }
+            
+            .cart-item .product-name,
+            .cart-item .product-price {
+                margin: 0 10px;
+            }
+            
+            .cart-item button {
+                margin-top: 10px;
+                padding: 5px 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: #f44336;
+                color: white;
+                cursor: pointer;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .hot {
+                color: red;
+                font-weight: bold;
+            }
+
+            .recommend {
+                color: blue;
+                font-weight: bold;
+            }
+
+            .cart {
+                width:600px;
+                flex-grow: 1;
+                overflow: auto;
+            }
+			
+            .checkout {
+                flex-shrink: 0;
+                height: 40px;
+                background-color: #e8ddaa;
+                border: none;
+                border-radius: 10px;
+                font-size:20px;
+            }
+            #sale_total{
+            	padding-left: 20px;
+            	font-size: 19px;
+            	margin: 10px 0;
+            	display: flex;
+            }
+            #total{
+            	color: #e85932;
+            }
+            #mune{
+            	background-color: #eceeb6;
+            	height: 80px;
+            	padding-left:80px ;
+            	box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+            	position: relative;
+            	z-index: 10;
+            }
+            .button {
+                font-size: 20px; /* 设置字体大小 */
+                padding: 10px; /* 设置内边距，使按钮看起来更大 */
+            }
+        </style>
+    </head>
+    <body>
+			<div id="mune">
+				<img src="img/shopping-LOGO.png">
+			</div>
+			<div class="row">
+				<div class="column nav">
+					<h2 style="text-indent: 1em;">导航栏</h2>
+					<ul>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('recommend')">推荐</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('hot')">热卖</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('fruits')">水果</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('vegetables')">蔬菜</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('grains')">粮食</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('dairy')">乳制品</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('meat')">肉类</a></div>
+						</li>
+						<li>
+						<div class="column_list"><a href="#" onclick="show('specialty')">特产</a></div>
+						</li>
+					</ul>
+				</div>
+				<div class="column products">
+					<h2>商品</h2>
+					<div id="fruits" class="hidden">
+						<h3>水果</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood3.png);"></div>
+							<div id="product-description">延安苹果以其酥脆的口感、甜美的味道和丰富的营养价值而闻名，是秋季的理想水果。</div>
+                            <p>延安苹果 - ￥15/斤 <span class="hot">热卖</span></p>
+							<button class="button" onclick="addToCart('延安苹果', 15, 'lightgreen')">+</button>
+							<button class="button" onclick="removeFromCart('延安苹果',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood1.png);"></div>
+							<div id="product-description">丹东草莓以其鲜艳的红色、甜美的口感和丰富的营养素而闻名，是春季最受欢迎的水果之一。</div>
+                            <p>丹东草莓 - ￥30/斤 <span class="recommend">推荐</span></p>
+							<button class="button" onclick="addToCart('丹东草莓', 30, 'yellow')">+</button>
+							<button class="button" onclick="removeFromCart('丹东草莓',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood5.png);"></div>
+							<div id="product-description">苹果是一种营养丰富、口感多样的水果，适合任何时候食用。</div>
+                            <p>苹果 - ￥2/斤</p>
+							<button class="button" onclick="addToCart('苹果', 2, 'lightgreen')">+</button>
+							<button class="button" onclick="removeFromCart('苹果',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood6.png);"></div>
+							<div id="product-description">香蕉以其软滑的口感、甜美的味道和丰富的钾元素而受到人们的喜爱。</div>
+                            <p>香蕉 - ￥3/斤</p>
+							<button class="button" onclick="addToCart('香蕉', 3, 'yellow')">+</button>
+							<button class="button" onclick="removeFromCart('香蕉',true)">-</button>
+						</div>
+					</div>
+					<div id="vegetables" class="hidden">
+						<h3>蔬菜</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood7.png);"></div>
+							<div id="product-description">菠菜是一种营养丰富的蔬菜，含有丰富的铁质和维生素，是健康饮食的理想选择。</div>
+                            <p>菠菜 - ￥4/斤</p>
+							<button class="button" onclick="addToCart('菠菜', 4, 'green')">+</button>
+							<button class="button" onclick="removeFromCart('菠菜',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood8.png);"></div>
+							<div id="product-description">胡萝卜以其鲜艳的橙色、脆嫩的口感和丰富的β-胡萝卜素而受到人们的喜爱。</div>
+                            <p>胡萝卜 - ￥3/斤</p>
+							<button class="button" onclick="addToCart('胡萝卜', 3, 'orange')">+</button>
+							<button class="button" onclick="removeFromCart('胡萝卜',true)">-</button>
+						</div>
+					</div>
+					<div id="grains" class="hidden">
+						<h3>粮食</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood9.png);"></div>
+							<div id="product-description">大米是亚洲人的主食，以其软糯的口感和丰富的碳水化合物而受到人们的喜爱。</div>
+                            <p>大米 - ￥10/斤</p>
+							<button class="button" onclick="addToCart('大米', 10, 'brown')">+</button>
+							<button class="button" onclick="removeFromCart('大米',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood10.png);"></div>
+							<div id="product-description">小麦是全球最重要的粮食作物之一，是制作面包、面条和其他面点的主要原料。</div>
+                            <p>小麦 - ￥8/斤</p>
+							<button class="button" onclick="addToCart('小麦', 8, 'goldenrod')">+</button>
+							<button class="button" onclick="removeFromCart('小麦',true)">-</button>
+						</div>
+					</div>
+					<div id="dairy" class="hidden">
+						<h3>乳制品</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood11.png);"></div>
+							<div id="product-description">牛奶是一种营养丰富的饮品，含有丰富的蛋白质和钙质，适合所有年龄段的人群食用。</div>
+                            <p>牛奶 - ￥6/瓶</p>
+							<button class="button" onclick="addToCart('牛奶', 6, 'ivory')">+</button>
+							<button class="button" onclick="removeFromCart('牛奶',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood12.png);"></div>
+							<div id="product-description">酸奶是一种经过发酵的乳制品，以其酸甜的口感和丰富的益生菌而受到人们的喜爱。</div>
+                            <p>酸奶 - ￥7/瓶</p>
+							<button class="button" onclick="addToCart('酸奶', 7, 'azure')">+</button>
+							<button class="button" onclick="removeFromCart('酸奶',true)">-</button>
+						</div>
+					</div>
+					<div id="meat" class="hidden">
+						<h3>肉类</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood13.png);"></div>
+							<div id="product-description">鸡肉是一种营养丰富、口感鲜美的肉类，是各种烹饪方法的理想选择。</div>
+                            <p>鸡肉 - ￥20/斤</p>
+							<button class="button" onclick="addToCart('鸡肉', 20, 'pink')">+</button>
+							<button class="button" onclick="removeFromCart('鸡肉',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood14.png);"></div>
+							<div id="product-description">猪肉是一种口感鲜美、营养丰富的肉类，是各种菜肴的主要原料。</div>
+                            <p>猪肉 - ￥25/斤</p>
+							<button class="button" onclick="addToCart('猪肉', 25, 'red')">+</button>
+							<button class="button" onclick="removeFromCart('猪肉',true)">-</button>
+						</div>
+					</div>
+					<div id="specialty" class="hidden">
+						<h3>特产</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood1.png);"></div>
+							<div id="product-description">丹东草莓以其鲜艳的红色、甜美的口感和丰富的营养素而闻名，是春季最受欢迎的水果之一。</div>
+                            <p>丹东草莓 - ￥30/斤</p>
+							<button class="button" onclick="addToCart('丹东草莓', 30, 'purple')">+</button>
+							<button class="button" onclick="removeFromCart('丹东草莓',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood2.png);"></div>
+							<div id="product-description">赣南脐橙以其鲜亮的橙色、酸甜适中的口感和丰富的维生素C而受到人们的喜爱。</div>
+                            <p>赣南脐橙 - ￥20/斤</p>
+							<button class="button" onclick="addToCart('赣南脐橙', 20, 'olive')">+</button>
+							<button class="button" onclick="removeFromCart('赣南脐橙',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood3.png);"></div>
+							<div id="product-description">延安苹果以其酥脆的口感、甜美的味道和丰富的营养价值而闻名，是秋季的理想水果。</div>
+                            <p>延安苹果 - ￥15/斤</p>
+							<button class="button" onclick="addToCart('延安苹果', 15, 'lightgreen')">+</button>
+							<button class="button" class="button" onclick="removeFromCart('延安苹果',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood15.png);"></div>
+							<div id="product-description">大同黄花以其鲜艳的黄色、独特的香气和丰富的药用价值而受到人们的喜爱。</div>
+                            <p>大同黄花 - ￥40/斤</p>
+							<button class="button" onclick="addToCart('大同黄花', 40, 'goldenrod')">+</button>
+							<button class="button" onclick="removeFromCart('大同黄花',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood4.png);"></div>
+							<div id="product-description">潜江小龙虾以其鲜美的肉质和独特的口感而受到人们的喜爱，是夏季烧烤和火锅的理想选择。</div>
+                            <p>潜江小龙虾 - ￥50/斤</p>
+							<button class="button" onclick="addToCart('潜江小龙虾', 50, 'lightblue')">+</button>
+							<button class="button" onclick="removeFromCart('潜江小龙虾',true)">-</button>
+						</div>
+					</div>
+					<div id="recommend" class="hidden">
+						<h3>推荐</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood1.png);"></div>
+							<div id="product-description">丹东草莓以其鲜艳的红色、甜美的口感和丰富的营养素而闻名，是春季最受欢迎的水果之一。</div>
+                            <p>丹东草莓 - ￥30/斤</p>
+							<button class="button" onclick="addToCart('丹东草莓', 30, 'purple')">+</button>
+							<button class="button" onclick="removeFromCart('丹东草莓',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood2.png);"></div>
+							<div id="product-description">赣南脐橙以其鲜亮的橙色、酸甜适中的口感和丰富的维生素C而受到人们的喜爱。</div>
+                            <p>赣南脐橙 - ￥20/斤</p>
+							<button class="button" onclick="addToCart('赣南脐橙', 20, 'olive')">+</button>
+							<button class="button" onclick="removeFromCart('赣南脐橙',true)">-</button>
+						</div>
+					</div>
+					<div id="hot" class="hidden">
+						<h3>热卖</h3>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood3.png);"></div>
+							<div id="product-description">延安苹果以其酥脆的口感、甜美的味道和丰富的营养价值而闻名，是秋季的理想水果。</div>
+                            <p>延安苹果 - ￥15/斤</p>
+							<button class="button" onclick="addToCart('延安苹果', 15, 'lightgreen')">+</button>
+							<button class="button" onclick="removeFromCart('延安苹果',true)">-</button>
+						</div>
+						<div class="product">
+							<div style="height:100px; width:100px;background-image: url(img/salegood4.png);"></div>
+							<div id="product-description">潜江小龙虾以其鲜美的肉质和独特的口感而受到人们的喜爱，是夏季烧烤和火锅的理想选择。</div>
+                            <p>潜江小龙虾 - ￥50/斤</p>
+							<button class="button" onclick="addToCart('潜江小龙虾', 50, 'lightblue')">+</button>
+							<button class="button" onclick="removeFromCart('潜江小龙虾',true)">-</button>
+						</div>
+					</div>
+				</div>
+				<div class="column cart">
+					<h2>购物车</h2>
+					<div id="cart" class="cart">
+						你的购物车是空的
+					</div>
+					<div id="sale_total">
+						<div>总价：</div><div id="total">￥0</div>
+					</div>
+					<button onclick="checkout()" class="checkout">去结账</button>
+				</div>
+			</div>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var cart = {};
+            var productDetails = {
+                '丹东草莓': {
+                    imageUrl: 'img/salegood1.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '赣南脐橙': {
+                    imageUrl: 'img/salegood2.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '延安苹果': {
+                    imageUrl: 'img/salegood3.png',
+                    description: '这里是延安苹果的介绍'
+                },
+                '潜江小龙虾': {
+                    imageUrl: 'img/salegood4.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '苹果': {
+                    imageUrl: 'img/salegood5.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '香蕉': {
+                    imageUrl: 'img/salegood6.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '菠菜': {
+                    imageUrl: 'img/salegood7.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '胡萝卜': {
+                    imageUrl: 'img/salegood8.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '大米': {
+                    imageUrl: 'img/salegood9.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '小麦': {
+                    imageUrl: 'img/salegood10.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '牛奶': {
+                    imageUrl: 'img/salegood11.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '酸奶': {
+                    imageUrl: 'img/salegood12.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '鸡肉': {
+                    imageUrl: 'img/salegood13.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+                '猪肉': {
+                    imageUrl: 'img/salegood14.png',
+                    description: '这里是丹东草莓的介绍'
+                },
+            };
+
+            function show(id) {
+                var categories = ['recommend', 'hot', 'fruits', 'vegetables', 'grains', 'dairy', 'meat', 'specialty'];
+                $.each(categories, function(i, category) {
+                    $('#' + category).addClass('hidden');
+                });
+                $('#' + id).removeClass('hidden');
+            }
+
+            function addToCart(product, price, color) {
+                if (cart[product]) {
+                    cart[product].count += 1;
+                } else {
+                    cart[product] = {
+                        price: price,
+                        count: 1,
+                        color: color
+                    };
+                }
+                updateCart();
+            }
+
+            function removeFromCart(product, isSingle) {
+                if (cart[product]) {
+                    if (isSingle && cart[product].count > 1) {
+                        cart[product].count -= 1;
+                    } else {
+                        delete cart[product];
+                    }
+                }
+                updateCart();
+            }
+
+            function updateCart() {
+                var cartDiv = $('#cart');
+                cartDiv.empty();
+                var total = 0;
+                $.each(cart, function(product, details) {
+                    var item = $('<div>').addClass('cart-item');
+                    var icon = $('<div>').addClass('cart-icon').css('background-image', 'url(' + productDetails[product].imageUrl + ')');
+                    item.append(icon);
+                    var name = $('<div>').addClass('product-name').text(product);
+                    item.append(name);
+                    var price = $('<div>').addClass('product-price').text('￥' + details.price + '/斤 x ' + details.count +
+                        ' = ￥' + (details.price * details.count));
+                    item.append(price);
+                    var removeButton = $('<button>').text('×').click(function() {
+                        if (confirm('你确定要移除这个商品吗？')) {
+                            removeFromCart(product);
+                        }
+                    });
+                    item.append(removeButton);
+                    cartDiv.append(item);
+                    total += details.price * details.count;
+                });
+                if (cartDiv.is(':empty')) {
+                    cartDiv.text('你的购物车是空的');
+                }
+                $('#total').text('￥' + total);
+            }
+
+
+
+            function checkout() {
+                alert('你的订单已提交，总价为￥' + getTotalPrice());
+                cart = {};
+                updateCart();
+            }
+
+            function getTotalPrice() {
+                var total = 0;
+                $.each(cart, function(product, details) {
+                    total += details.price * details.count;
+                });
+                return total;
+            }
+
+            $(document).ready(function() {
+                show('recommend');
+            });
+        </script>
+
+    </body>
+</html>

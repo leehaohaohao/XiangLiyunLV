@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+	<title>行程规划</title>
+	<meta charset="utf-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="stylesheet" type="text/css" href="css/index_page.css">
+    <head>
+        <style>
+            body,html
+            {
+                height: 100%;
+                margin: 0;
+                background-color: #eaf1ec;/* 褐色，象征土壤和木材 */
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                height: calc(100% - 90px);
+                align-items: center;
+            }
+
+            .route-planner,
+            .attraction-selector {
+                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 1000px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+                overflow: auto;
+                /* 添加这个属性来使内容可以滚动 */
+            }
+
+            .route-planner {
+                position: relative;
+                background-color: #fff; /* 卡其色，象征稻草和谷物 */
+            }
+
+            .attraction-selector {
+                background-color:#e4f6d1; /* 森林绿，象征自然和绿色植物 */
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .attractions,
+            .filter-panel {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            .attractions {
+                flex: 1;
+            }
+
+            .filter-button {
+                width: 50px;
+                background-color: #5d8c40; /* 橄榄色，象征自然和和平 */
+                color: #FFFFFF; /* 白色，提供对比，确保文本可读 */
+                margin-right: 20px;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+                writing-mode: vertical-rl;
+                text-align: center;
+                height: 100%;
+                cursor: pointer;
+            }
+
+
+            .filter-panel {
+                position: fixed;
+                top: 10%;
+                /* 修改这个值来调整上边的间距 */
+                bottom: 10%;
+                /* 修改这个值来调整下边的间距 */
+                left: 10%;
+                /* 修改这个值来调整左边的间距 */
+                right: 10%;
+                /* 修改这个值来调整右边的间距 */
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+                border-radius: 10px;
+                justify-content: center;
+                align-items: center;
+                z-index: 10;
+            }
+
+            .filter-content {
+                position: absolute;
+                /* 或者 'fixed' */
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 999;
+                /* 确保在遮罩层之上 */
+                ;
+                z-index: 999;
+                width: 100%;
+                /* 修改这个值来调整筛选内容的宽度 */
+                height: 100%;
+                /* 修改这个值来调整筛选内容的高度 */
+                background-color: #ffffff;
+                border-radius: 10px;
+                /* 添加这一行来给筛选内容添加圆角 */
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .attraction,
+            .travel-mode,
+            .location {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                width: 100px;
+                height: 100px;
+                margin: 10px;
+                border-radius: 10px;
+                color: #ffffff;
+                font-weight: bold;
+            }
+
+            .high-speed-rail {
+                background-image: url(img/travel_road1.png);
+            }
+
+            .airplane {
+                background-image: url(img/travel_road4.png);
+            }
+
+            .train {
+                background-image: url(img/travel_road3.png);
+            }
+			.rail{
+                background-image: url(img/travel_road2.png);
+			}
+            .checkbox {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 30px;
+                height: 30px;
+                background-color: #ffffff;
+                border-radius: 50%;
+            }
+
+            .checked {
+                background-color: #db2020;
+            }
+
+            .location {
+                background-color: #dfdfdf;
+                color: #000000;
+            }
+
+            .route {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                background-color: #ffffff;
+                border-radius: 50%;
+                text-align: center;
+                cursor: pointer;
+                font-size: 20px;
+                z-index: 1000;
+            }
+
+            .filter-category {
+                display: flex;
+
+                align-items: center;
+                margin-bottom: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: #f0f0f0;
+                border-bottom: 1px solid #ccc;
+                /* 添加这一行来添加分隔线 */
+            }
+
+            .filter-category-title {
+                font-weight: bold;
+                margin-right: 10px;
+                color: #007BFF;
+            }
+
+            .filter-option {
+                cursor: pointer;
+                margin-right: 5px;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: #ffffff;
+                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+            }
+
+            .filter-option.selected {
+                color: white;
+                background-color: #007BFF;
+            }
+
+            .filter-panel-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* 背景色为半透明黑色 */
+                display: none;
+                /* 默认隐藏 */
+                z-index: 998;
+                /* 确保在其他内容之上 */
+            }
+
+            .export-button {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                padding: 10px;
+                background-color: #007BFF;
+                color: #ffffff;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    </head>
+    <body>
+		<div class="menu" style="padding-left:40px ;display: block;">
+			<img src="img/planing-LOGO.png">
+		</div>
+        <div class="container">
+            <div class="route-planner">
+                <div class="route">
+                    <div class="location">当前位置</div>
+                    <button class="export-button">导出为PNG</button>
+                </div>
+            </div>
+            <div class="attraction-selector">
+                <div class="filter-button">
+                    筛选
+                </div>
+                <div class="attractions">
+                    <div class="attraction high-speed-rail" data-region="东部" data-economy="经济发达" data-history="有历史遗迹"
+                        data-culture="有地方特色" data-nature="有自然景观" data-climate="热带" data-population="人口密集">
+                        <div class="checkbox"></div>
+                        <div>XX山景点</div>
+                    </div>
+                    <div class="attraction airplane" data-region="西部" data-economy="经济一般" data-history="无历史遗迹"
+                        data-culture="无地方特色" data-nature="无自然景观" data-climate="亚热带" data-population="人口稀少">
+                        <div class="checkbox"></div>
+                        <div>生态花园</div>
+                    </div>
+                    <div class="attraction train" data-region="南部" data-economy="经济欠发达" data-history="历史悠久"
+                        data-culture="有名的节日" data-nature="有名的公园" data-climate="温带" data-population="城市">
+                        <div class="checkbox"></div>
+                        <div>农场</div>
+                    </div>
+                    <div class="attraction rail" data-region="北部" data-economy="贫困地区" data-history="近代建立"
+                        data-culture="无名的节日" data-nature="无名的公园" data-climate="寒带" data-population="乡村">
+                        <div class="checkbox"></div>
+                        <div>茶园</div>
+                    </div>
+                    <!-- 添加更多的.attraction div来表示更多的景点 -->
+                </div>
+            </div>
+        </div>
+        <div class="filter-panel">
+            <div class="close-button">x</div>
+            <div class="filter-content">
+                <div class="filter-category">
+                    <div class="filter-category-title">地区</div>
+                    <div class="filter-option selected" data-filter="region" data-value="全部">全部</div>
+                    <div class="filter-option" data-filter="region" data-value="东部">东部</div>
+                    <div class="filter-option" data-filter="region" data-value="西部">西部</div>
+                    <div class="filter-option" data-filter="region" data-value="南部">南部</div>
+                    <div class="filter-option" data-filter="region" data-value="北部">北部</div>
+                    <div class="filter-option" data-filter="region" data-value="中部">中部</div>
+                    <div class="filter-option" data-filter="region" data-value="海岛">海岛</div>
+                </div>
+                <div class="filter-category">
+                    <div class="filter-category-title">经济</div>
+                    <div class="filter-option selected" data-filter="economy" data-value="全部">全部</div>
+                    <div class="filter-option" data-filter="economy" data-value="经济发达">经济发达</div>
+                    <div class="filter-option" data-filter="economy" data-value="经济一般">经济一般</div>
+                    <div class="filter-option" data-filter="economy" data-value="经济欠发达">经济欠发达</div>
+                    <div class="filter-option" data-filter="economy" data-value="贫困地区">贫困地区</div>
+                    <div class="filter-option" data-filter="economy" data-value="富裕地区">富裕地区</div>
+                    <div class="filter-option" data-filter="economy" data-value="中等收入">中等收入</div>
+                </div>
+                <!-- 添加更多的.filter-category div来表示更多的筛选类别 -->
+            </div>
+            <div class="filter-panel-background"></div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('.export-button').click(function() {
+                    $(this).hide(); // 隐藏按钮
+                    html2canvas($('.route-planner')[0]).then(function(canvas) {
+                        var link = document.createElement('a');
+                        link.download = '路线规划图.png';
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                        $('.export-button').show(); // 显示按钮
+                    });
+                });
+                var idCounter = 0;
+                var lastDate = new Date();
+                $('.attraction .checkbox').click(function(event) {
+                    event.stopPropagation();
+                    var checkbox = $(this);
+                    checkbox.toggleClass('checked');
+                    var attraction = checkbox.parent();
+                    var travelModes = ['高铁', '飞机', '火车'];
+                    var randomTravelMode = travelModes[Math.floor(Math.random() * travelModes.length)];
+                    var weather = "晴天"; // 假设天气总是好的
+                    if (checkbox.hasClass('checked')) {
+                        // 如果景点被选中，添加到路线中
+                        var date = new Date(lastDate.getTime() + Math.floor(Math.random() * 4 + 1) *
+                            24 * 60 * 60 * 1000); // 随机选择未来四天内的一天
+                        lastDate = date; // 更新最后选择的日期
+                        var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date
+                            .getDate(); // 生成日期字符串
+                        attraction.attr('data-id', idCounter);
+                        $('.route').append('<div id="date-' + idCounter + '" class="date">' +
+                            dateString + '</div>');
+                        $('.route').append('<div id="weather-' + idCounter + '" class="weather">' +
+                            weather + '</div>');
+                        $('.route').append('<div id="travelmode-' + idCounter +
+                            '" class="travel-mode ' + randomTravelMode +
+                            '" style="background-color: ' + attraction.css('background-color') +
+                            ';">' + randomTravelMode + '</div>');
+                        $('.route').append('<div id="attraction-' + idCounter +
+                            '" class="attraction" style="background-color: ' + attraction.css(
+                                'background-color') + ';">' + attraction.find('div').last().text() +
+                            '</div>');
+                        idCounter++;
+                    } else {
+                        // 如果景点被取消选中，从路线中移除
+                        var id = attraction.attr('data-id');
+                        $('#attraction-' + id).remove();
+                        $('#travelmode-' + id).remove();
+                        $('#weather-' + id).remove();
+                        $('#date-' + id).remove();
+                    }
+                });
+                $('.attraction').click(function() {
+                    // 预留跳转到景点详情页面的代码
+                    // window.location.href = '/attraction-details/' + $(this).find('div').last().text();
+                });
+                $('.filter-button, .close-button').click(function() {
+                    $('.filter-panel').fadeToggle();
+                    $('.filter-panel-background').fadeToggle(); /* 添加这一行来在打开和关闭筛选面板时切换遮罩层的显示状态 */
+                });
+                $('.filter-content').click(function(event) {
+                    event.stopPropagation();
+                });
+                $('.filter-option').click(function() {
+                    $(this).parent().find('.filter-option').removeClass('selected');
+                    $(this).addClass('selected');
+                    var filter = $(this).data('filter');
+                    var value = $(this).data('value');
+                    $('.attraction').each(function() {
+                        var attraction = $(this);
+                        if (value == "全部" || attraction.data(filter) == value) {
+                            attraction.show();
+                        } else {
+                            attraction.hide();
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

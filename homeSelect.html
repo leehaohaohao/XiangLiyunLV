@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #edeeb5;
+            }
+
+            .slider {
+                width: 100%;
+                height: 500px;
+                overflow: hidden;
+            }
+
+            .slider img {
+                width: 100%;
+                height: 500px;
+                object-fit: cover;
+            }
+
+            .form {
+                width: 80%;
+                margin: 20px auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .form select {
+                width: 20%;
+                height: 40px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .form button {
+                width: 10%;
+                height: 40px;
+                border: none;
+                border-radius: 5px;
+                background-color: #f0c14b;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .list {
+                width: 80%;
+                margin: 20px auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-gap: 20px;
+            }
+
+            .list-item {
+                width: 100%;
+                height: 350px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+            .list-item img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .list-item h3 {
+                margin: 10px;
+                font-size: 20px;
+                color: #333;
+            }
+
+            .list-item p {
+                margin: 10px;
+                font-size: 16px;
+                color: #666;
+            }
+
+            .list-item-text {
+                height: 100px;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slider">
+            <img src="img/minsu1.jpg" alt="民宿1">
+            <img src="img/minsu2.jpg" alt="民宿2">
+            <img src="img/minsu3.jpg" alt="民宿3">
+        </div>
+        <div class="form">
+            <select name="area">
+                <option value="all">全部</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="guangzhou">广州</option>
+                <option value="shenzhen">深圳</option>
+                <option value="chengdu">成都</option>
+                <option value="hangzhou">杭州</option>
+            </select>
+            <select name="type">
+                <option value="all">全部</option>
+                <option value="modern">现代风格</option>
+                <option value="traditional">传统风格</option>
+                <option value="nature">自然风格</option>
+                <option value="luxury">豪华风格</option>
+            </select>
+            <select name="price">
+                <option value="all">全部</option>
+                <option value="low">500元以下</option>
+                <option value="medium">500-1000元</option>
+                <option value="high">1000元以上</option>
+            </select>
+            <button>查询</button>
+        </div>
+        <div class="list">
+            <div class="list-item" data-area="beijing" data-type="modern" data-price="medium">
+                <img src="img/minsu1.jpg" alt="民宿1">
+                <h3>北京现代风格民宿</h3>
+                <p>这是一家位于北京的现代风格民宿，提供舒适的住宿环境和便利的设施。</p>
+            </div>
+            <div class="list-item" data-area="shanghai" data-type="traditional" data-price="high">
+                <img src="img/minsu2.jpg" alt="民宿2">
+                <h3>上海传统风格民宿</h3>
+                <p>这是一家位于上海的传统风格民宿，拥有独特的装饰和优雅的氛围。</p>
+            </div>
+            <div class="list-item" data-area="guangzhou" data-type="nature" data-price="low">
+                <img src="img/minsu3.jpg" alt="民宿3">
+                <h3>广州自然风格民宿</h3>
+                <p>这是一家位于广州的自然风格民宿，周围环境优美，是您放松身心的好去处。</p>
+            </div>
+            <div class="list-item" data-area="sichuan" data-type="nature" data-price="low">
+                <img src="img/minsu4.jpg" alt="民宿4">
+                <h3>四川大熊猫民宿</h3>
+                <p>这是一家位于四川的自然风格民宿，周围环境优美，是您放松身心的好去处。</p>
+            </div>
+            <div class="list-item" data-area="yunnan" data-type="traditional" data-price="high">
+                <img src="img/minsu5.jpg" alt="民宿5">
+                <h3>云南古城民宿</h3>
+                <p>这是一家位于云南的传统风格民宿，拥有独特的装饰和优雅的氛围。</p>
+            </div>
+            <div class="list-item" data-area="guizhou" data-type="modern" data-price="medium">
+                <img src="img/hotel1.jpg" alt="酒店1">
+                <h3>贵州山水酒店</h3>
+                <p>这是一家位于贵州的现代风格酒店，提供舒适的住宿环境和便利的设施。</p>
+            </div>
+            <div class="list-item" data-area="zhejiang" data-type="luxury" data-price="high">
+                <img src="img/hotel2.jpg" alt="酒店2">
+                <h3>浙江湖边豪华酒店</h3>
+                <p>这是一家位于浙江的豪华风格酒店，拥有一流的设施和优质的服务。</p>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var slider = $(".slider");
+                var images = slider.find("img");
+                var index = 0;
+                var interval = 3000;
+
+                function switchImage() {
+                    images.hide();
+                    images.eq(index).show();
+                    index++;
+                    if (index == images.length) {
+                        index = 0;
+                    }
+                }
+
+                switchImage();
+                setInterval(switchImage, interval);
+                $("button").click(function() {
+                    var area = $("select[name='area']").val();
+                    var type = $("select[name='type']").val();
+                    var price = $("select[name='price']").val();
+
+                    $(".list-item").hide();
+
+                    $(".list-item").each(function() {
+                        var itemArea = $(this).data("area");
+                        var itemType = $(this).data("type");
+                        var itemPrice = $(this).data("price");
+
+                        if ((area == "all" || area == itemArea) &&
+                            (type == "all" || type == itemType) &&
+                            (price == "all" || price == itemPrice)) {
+                            $(this).show();
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

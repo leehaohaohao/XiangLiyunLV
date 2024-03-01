@@ -1,0 +1,203 @@
+<!DOCTYPE >
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>登录_欧盟合规综服平台</title>
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+			    background-color: #dcedf8;
+			}
+			.logo_in_head{
+				height:40px;
+				padding: 5px 0px;
+				background-color: white;
+				z-index: 1;;
+			}
+			#title_img{
+				width: 278px;
+				margin-left: 20px;
+			}
+			#main_content{
+				min-width: 980px;
+				flex: 1;
+			    background-image: url("img/logo_in_main_img.png");
+			    background-repeat: no-repeat;
+			    background-size:cover ;
+			}
+			.logo_in_det_content{
+				display: flex;
+				justify-content: center;
+				
+			}
+			.user_detail{
+			}
+			.det_content_container{
+			    display: flex;
+			    flex-direction: column; /* 垂直排列 */
+			    align-items: center;
+				width: 470px;
+				height:560px;
+				background-color: white;
+				border-radius:10px ;
+				margin-top:85px ;
+				
+				
+			}
+			.btn_user{
+				cursor: pointer;
+				text-align: center;
+				border-radius: 5px;
+				background-color: #00487B;
+				padding: 12px 12px;
+                width:100%;
+                transition: background-color 0.5s ease;
+			}
+            .btn_user:hover {
+                background-color: #0066cc;
+                /* 当鼠标悬停在按钮上时，改变背景颜色 */
+            }
+			.user_input{
+				margin-top:22px;
+			}
+			.user_input>input{
+				width: 370px;
+				height: 42px;
+				border-radius: 5px;
+				border:1px solid #C3DCF3;
+				padding-left: 12px;
+			}
+			.user_input>input:focus{
+				outline: none;
+				border: 1px solid #00487B;
+			}
+			.user_input>input::-webkit-input-placeholder{
+				
+				color: #DBDBDB;
+			}
+			.btn_ustext{
+				font-size: 18px;
+				color: white;
+			}
+			#usrimage{
+				width: 660px;
+				margin-top:100px ;
+				text-align: center;
+			}
+			#img1{
+				width: 100%;
+			}
+			#user_agreement_content{
+				font-size: 12px;
+				width: 370px;
+				
+			}
+			#denglustyle{
+				display: flex;
+				padding: 22px 0px;
+				border-bottom: 1px solid #C3DCF3;
+			}
+			#scanlogi{
+				width: 235px;
+				text-align: center;
+			}
+			#passwardlogi{
+				width: 235px;
+				text-align: center;
+				border-left: 1px solid #DBDBDB;
+			}
+			#main_text{
+				margin-top: 12px;
+				font-size: 22px;
+				font-weight: 500;
+				height: 64px;
+				line-height: 64px;
+			}
+			#or_select{
+				margin: 22px 0px;
+				font-size:15px ;
+				text-align: center;
+			}
+			#or_select>a{
+				color: #1E90FF;
+				cursor: pointer;
+				text-decoration: none;
+			}
+		</style>
+        <script type="text/javascript">
+            function login(event) {
+                // 阻止表单的默认提交行为
+                event.preventDefault();
+            
+                // 获取用户输入的邮箱地址和密码
+                var phone = document.getElementsByName('phone')[0].value;
+                var password = document.getElementsByName('password_input')[0].value;
+            
+                // 检查所有的输入框是否都已填写
+                if (!phone || !password) {
+                    alert('请填写所有的输入框');
+                    return;
+                }
+            
+                // 所有检查都通过，直接跳转到主页面
+                window.location.href = 'index.html';
+            }
+
+
+        </script>
+	</head>
+	<body>
+		<div class="logo_in_head">
+			<a href="index.html"><img id="title_img" src="img/LOGO.png"></a>
+		</div> 
+		<div id=main_content>
+			<div class="logo_in_det_content">
+				<div id="usrimage">
+					<a href="index.html"><img id="img1" src="img/logosign.png"></a>
+				</div>
+				<div class="det_content_container">
+					<div id="lgi_head_container">
+						<div id="denglustyle">
+							<div id="scanlogi">扫码登录</div>
+							<div id="passwardlogi">密码登录</div>
+						</div>
+					</div>
+					<div id="main_text">
+						<span>登录综服平台</span>
+					</div>
+					<form name="get_user" method="get" onsubmit="return sign_checkReg()">
+						<div class="user_detail">
+			                <div  class="user_input">
+			                    <input type="text" name="phone" placeholder="手机号">
+			                    <span id="mailbox"></span>
+			                </div>
+			                <div class="user_input">
+			                    <input type="password_input" name="password_input" placeholder="密码">
+			                    <span id="pdText"></span>
+			                </div>
+			                <div id="or_select">
+			                	<a href="resigter.html">注册账号</a>
+			                	<span>|</span>
+			                	<a >忘记密码</a>
+			                </div>
+			                <button type="button" class="btn_user" id="loginButton" onclick="login(event)">
+			                    <span class="btn_ustext">
+			                        <span>登录</span>
+			                    </span>
+			                </button>
+			                <div id="user_agreement_content">
+			                    <div style="margin-top:20px;padding-top: 12px;color: #808080;border-top: 1px solid #DBDBDB;">我们为您提供服务，在登录过程中会使用到您的帐号和网络信息提升登录体验。<a style="color: #1E90FF;text-decoration: underline;">了解更多</a></div>
+			                    
+			                </div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div style="background-color:#F5F5F5;height: 88px;margin-top: 22px;font-size:14px;padding-left:22px;display:flex;align-items: center;">
+				<span>©2023 oumengheguizongfupingtai.abc 版权所有</span>
+			</div>
+		</div>
+	</body>
+</html>

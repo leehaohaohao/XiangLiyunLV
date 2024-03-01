@@ -1,0 +1,224 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #edeeb5;
+            }
+
+            .slider {
+                width: 100%;
+                height: 500px;
+                overflow: hidden;
+            }
+
+            .slider img {
+                width: 100%;
+                height: 500px;
+                object-fit: cover;
+            }
+
+            .form {
+                width: 80%;
+                margin: 20px auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .form select {
+                width: 20%;
+                height: 40px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .form button {
+                width: 10%;
+                height: 40px;
+                border: none;
+                border-radius: 5px;
+                background-color: #f0c14b;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .list {
+                width: 80%;
+                margin: 20px auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-gap: 20px;
+            }
+
+            .list-item {
+                width: 100%;
+                height: 350px;
+                /* 增加这个值 */
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                /* 添加这一行 */
+            }
+
+            .list-item img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .list-item h3 {
+                margin: 10px;
+                font-size: 20px;
+                color: #333;
+            }
+
+            .list-item p {
+                margin: 10px;
+                font-size: 16px;
+                color: #666;
+            }
+
+            .list-item-text {
+                height: 100px;
+                /* 你可以根据需要调整这个值 */
+                overflow: auto;
+                /* 添加这一行 */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slider">
+            <img src="img/huangshan.jpg" alt="黄山">
+            <img src="img/shouxihu.jpg" alt="扬州瘦西湖">
+            <img src="img/longjing.jpg" alt="杭州龙井茶园">
+        </div>
+        <div class="form">
+            <select name="area">
+                <option value="all">全部</option>
+                <option value="anhui">安徽</option>
+                <option value="jiangsu">江苏</option>
+                <option value="zhejiang">浙江</option>
+                <option value="sichuan">四川</option>
+                <option value="yunnan">云南</option>
+                <option value="guizhou">贵州</option>
+            </select>
+            <select name="preference">
+                <option value="all">全部</option>
+                <option value="nature">自然风光</option>
+                <option value="history">历史文化</option>
+                <option value="agriculture">农业体验</option>
+                <option value="rural_culture">乡村文化</option>
+            </select>
+            <select name="budget">
+                <option value="all">全部</option>
+                <option value="low">500元以下</option>
+                <option value="medium">500-1000元</option>
+                <option value="high">1000元以上</option>
+            </select>
+            <select name="duration">
+                <option value="all">全部</option>
+                <option value="day_trip">日游</option>
+                <option value="weekend">周末游</option>
+                <option value="long_vacation">长假游</option>
+            </select>
+            <button>查询</button>
+        </div>
+        <div class="list">
+            <div class="list-item" data-area="anhui" data-preference="nature" data-budget="medium"
+                data-duration="long_vacation" data-url="huangshan.html">
+                <img src="img/huangshan.jpg" alt="黄山">
+                <h3>黄山</h3>
+                <p>黄山是中国著名的风景名胜区，有“天下第一奇山”之称，以奇松、怪石、云海、温泉四绝闻名。</p>
+            </div>
+            <div class="list-item" data-area="jiangsu" data-preference="history" data-budget="high"
+                data-duration="weekend" data-url="huangshan.html">
+                <img src="img/shouxihu.jpg" alt="扬州瘦西湖">
+                <h3>扬州瘦西湖</h3>
+                <div class="list-item-text">
+                    <p>扬州瘦西湖是中国历史文化名城扬州的代表性风景区，集园林、建筑、诗词、绘画、碑刻等多种艺术于一体。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="zhejiang" data-preference="agriculture" data-budget="low"
+                data-duration="day_trip" data-url="huangshan.html">
+                <img src="img/longjing.jpg" alt="杭州龙井茶园">
+                <h3>杭州龙井茶园</h3>
+                <div class="list-item-text">
+                    <p>杭州龙井茶园是中国最著名的茶叶产地之一，以生产龙井茶而闻名，是游客体验茶文化和品尝茶艺的好去处。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="sichuan" data-preference="rural_culture" data-budget="medium"
+                data-duration="long_vacation" data-url="huangshan.html">
+                <img src="img/danba.jpg" alt="丹巴藏寨">
+                <h3>丹巴藏寨</h3>
+                <div class="list-item-text">
+                    <p>丹巴藏寨位于四川省丹巴县，是中国最美六大古镇古村之首，以其悠久历史、独特景观、人文资源被列入世界文化景观遗产名录。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="yunnan" data-preference="history" data-budget="high"
+                data-duration="long_vacation" data-url="huangshan.html">
+                <img src="img/lijiang.jpg" alt="丽江大研镇">
+                <h3>丽江大研镇</h3>
+                <div class="list-item-text">
+                    <p>丽江大研镇就是丽江古城，坐落在玉龙雪山下，是中国历史文化名城丽江的代表性风景区。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="guizhou" data-preference="rural_culture" data-budget="medium"
+                data-duration="weekend" data-url="huangshan.html">
+                <img src="img/zaixing.jpg" alt="肇兴侗寨">
+                <h3>肇兴侗寨</h3>
+                <div class="list-item-text">
+                    <p>位于贵州黎平县的肇兴侗寨，是全国最大的侗族村寨之一，主要居住着侗族同胞1000余户，有 "侗乡第一寨 "之美誉。</p>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var slider = $(".slider");
+                var images = slider.find("img");
+                var index = 0;
+                var interval = 3000;
+
+                function switchImage() {
+                    images.hide();
+                    images.eq(index).show();
+                    index++;
+                    if (index == images.length) {
+                        index = 0;
+                    }
+                }
+
+                switchImage();
+                setInterval(switchImage, interval);
+                $("button").click(function() {
+                    var area = $("select[name='area']").val();
+                    var preference = $("select[name='preference']").val();
+                    var budget = $("select[name='budget']").val();
+
+                    $(".list-item").hide(); // 首先隐藏所有景点
+
+                    $(".list-item").each(function() {
+                        var itemArea = $(this).data("area");
+                        var itemPreference = $(this).data("preference");
+                        var itemBudget = $(this).data("budget");
+
+                        if ((area == "all" || area == itemArea) &&
+                            (preference == "all" || preference == itemPreference) &&
+                            (budget == "all" || budget == itemBudget)) {
+                            $(this).show(); // 如果景点符合筛选条件，则显示
+                        }
+                    });
+                });
+                $(".list-item").click(function() {
+                            var url = $(this).data("url"); // 获取景点的URL
+                            window.open(url, "_blank"); // 打开新的页面
+                        });
+            });
+        </script>
+    </body>
+</html>
