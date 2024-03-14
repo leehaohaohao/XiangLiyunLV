@@ -1,0 +1,356 @@
+
+.menu{
+	height: 90px;
+	padding: 0px;
+    background-color:#eceeb6;
+    color:#ffffff;
+    width:100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+    z-index: 2;
+}
+.menu_container{
+    justify-content: flex-start;
+    margin-right: 230px;
+}
+.menu_imformation{
+	height: 100%;
+	margin-left: 40px;
+	font-size: 18px;
+}
+.menu_imformation .menu_imformation_list{
+    height: 100%;
+}
+.menu_container .menu_imformation_list li{
+	display: inline-block;
+    height: 100%;
+    padding: 0 28px;
+}
+.menu_container .menu_imformation_list>li>a{
+    align-items: center;
+    color: #86b87d;
+    cursor: default;
+    display: flex;
+    font-size: 21px;
+	font-weight: bold;
+    height: 100%;
+    padding: 0;
+    position: relative;
+}
+.logo_container{
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+#logo{
+	width: 315px;
+}
+.user_content{
+	width:220px;
+	height: 100%;
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.sign{
+	margin-right:20px;
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#sign_in{
+	width:60px;
+	line-height: 32px;
+	text-align: center;
+	margin:0px 8px;
+}
+#sign_up{
+	width: 60px;
+	line-height: 32px;
+	text-align: center;
+	border-radius: 30px;
+	background-color:#00487b;
+}
+#sign_up>a{
+	color: #fff;
+	text-decoration: none;
+}
+.body_container{
+	width: 100%;
+	height: 100%;
+}
+.submenu {
+    position: relative;
+    max-height: 0px;
+	display: flex;
+	overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    z-index: 1;
+}
+.sub_fuction{
+	border-bottom-right-radius: 10px;
+	background-color: #f6f6f6;
+	display: flex;
+	padding-right: 14px;
+}
+.sub_main{
+	margin: 32px 0 0 0;
+}
+.submenu_list{
+	height: 480px;
+	padding: 0 18px;
+}
+.submenu_list>li{
+	width: 200px;
+	font-size: 19px;
+	text-align: center;
+	color: #00487B;
+	padding: 12px 0px;
+	border-bottom: 1px solid #808080;
+	transition: all 0.2s ease;
+}
+.submenu_list>li:hover{
+	background-color: #C3DCF3;
+	color: white;
+}
+.sub_function_list{
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin :0 0 22px 14px;
+	padding:22px 16px 0 16px;
+	background-color: white;
+	flex-direction: column;
+}
+.sub_function_list>ul{
+	padding: 0;
+}
+.sub_function_list>ul>li{
+	line-height: 44px;
+	font-size:16px ;
+	color: grey;
+}
+.sub_function_list>ul>li>div{
+	font-size:14px ;
+	color: #C3DCF3;
+}
+.sub_function_list>h3{
+	color: #080808;
+}
+#sub_operation{
+	margin:0 auto;
+	border-bottom-left-radius:10px ;
+	border-bottom-right-radius: 10px;
+	display: flex;
+    background-color: rgb(255,255,255,0.7);
+}
+#sub_reporting{
+	margin:0 auto;
+	border-bottom-left-radius:10px ;
+	border-bottom-right-radius: 10px;
+	display: flex;
+    background-color: rgb(255,255,255,0.7);
+}
+#sub_training{
+	margin:0 auto;
+	border-bottom-left-radius:10px ;
+	border-bottom-right-radius: 10px;
+	display: flex;
+    background-color: rgb(255,255,255,0.7);
+}
+#sub_more{
+	margin:0 auto;
+	border-bottom-left-radius:10px ;
+	border-bottom-right-radius: 10px;
+	display: flex;
+    background-color: rgb(255,255,255,0.7);
+}
+.picture_list{
+   	width:916px;
+   	padding: 20px 0 20px 0;
+	overflow: hidden;
+}
+
+.main_body{   
+	position: absolute;    
+	top: 90px;   	
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+#pop_picture{
+	background-color:#e7d9aa ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    width: 100%;
+	height: 500px;
+	
+	display: flex;
+    flex-direction: column; 
+    align-items: center;
+    
+}
+.point_list{
+	border-radius:4px ;
+	
+	width: 600px;
+	display: flex;
+	background-color: rgb(123,125,102,0.3);
+	
+}
+.point_list div{
+	flex: 1;
+	height:8px;
+	border-radius:4px ;
+}
+.function_face{
+	background-color: #a5cb83;
+}
+#function_list{
+	display: flex;
+	margin:0 79px;
+	padding-left: 0;
+	height: 100%;
+}
+#function_list>li{
+	flex: 1;
+	padding: 22px 22px 42px 22px;
+	color: white;
+	text-align: center;
+	display: flex;
+    flex-direction: column; 
+    transition: color 0.5s ease;
+}
+
+#function_list>li:hover{
+	color: #52a5c8;
+	border-radius:10px ;
+	background: rgba(223, 239, 185, 1);
+	
+}
+#lan_mu1{
+	display: flex;
+	justify-content: center;
+}
+
+#about_lines_in{
+	background-color: #f9f8ef;
+	margin: 0 22px;
+	padding:0 20px ;
+}
+.lines{
+	padding:12px 0 ;
+	text-indent: 2em;
+	border-bottom:1px solid #616059;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#head_line{
+	padding: 22px 2px ;
+	border: 1px solid #ececec;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: white;
+	display: flex;
+}
+#head_line_cover{
+}
+.lines:hover{
+	color:#ff9900 ;
+}
+#lines_to_more{
+	padding:10px 0px 20px 0px;
+	background-color: #ede5d1;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	text-align: center;
+}
+
+#content_list{
+   	position:relative;
+    left:0px;
+	width: 2748px;
+	height: 440px;
+	transition: left 0.5s ease;
+	display: flex;
+}
+#lines_container{
+	margin-left:20px ;
+}
+#lan_mu2{
+	display: flex;
+	margin-top: 30px;
+	justify-content: center;
+}
+#head_little_img{
+	width: 245px;
+	margin-left: 10px;
+}
+#head_little_img>img{
+	width: 240px;
+}
+#sale_items{
+	display:flex;
+	width: 660px;
+	flex-wrap: wrap;
+}
+.sale_item{
+	width: 245px;
+	display: flex;
+	flex-direction: column;
+	margin: 2px 25px;
+}
+.sale_item>img{
+	
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	border:2px solid #F5F5F5;
+}
+#sale_title{
+	text-align: center;
+	font-size: 30px;
+	padding: 12px 0;
+	border:2px dashed #86B87D;
+}
+#sale_item_more{
+	font-size: 44px;
+	height: 100%;
+	width: 80px;
+	background-color: #f0e8dd;
+　　writing-mode:tb-lr;
+　　-webkit-writing-mode:vertical-lr;
+	writing-mode:vertical-lr;
+	text-align: center;
+	
+	border-bottom-right-radius: 30px;
+}
+.sale_item_price{
+	font-size: 30px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #ff7651;
+	text-align: center;
+	background-color:white ;
+	padding: 19px 0;
+	border:2px solid #F5F5F5;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+#road_plan{
+	margin-left:20px;
+}
+.little_div{
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	right: 30px;
+	bottom: 64px;
+	background-color: white;
+	border-radius:22px;
+}
+.little_div a{
+	margin: 6px;
+}

@@ -1,0 +1,97 @@
+.from_input>input {
+	width: 476px;
+	height: 37px;
+	border: 1px solid #C3DCF3;
+	border-radius: 5px;
+	padding: 0px 12px;
+	font-size: 16px;
+	background: transparent;
+}
+select{
+	height: 23px;
+	width: 200px;
+	margin: 0 auto;
+}
+.from_input>input::-webkit-input-placeholder {
+	color: #dbdbdb;
+}
+
+.from_input>input:focus {
+	border: 1px solid #1E90FF;
+	outline: none;
+}
+
+.from_input {
+	width: 500px;
+	height: 37px;
+	margin-bottom: 40px;
+}
+
+.detail {
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 500px;
+}
+.main_head {
+	padding: 30px 0;
+	border-bottom: 1px solid #ededed;
+}
+.heatext{
+	font-size: 20px;
+	text-indent: 20px;
+}
+.headt{
+	padding: 30px 0;
+	border-bottom:1px solid #95C0C9 ;
+}
+.file_input{
+	font-size: 17px;
+}
+.gat_input{
+	width: 600px;
+	margin:  10px 0;
+	display: flex;
+}
+.gat_input>input{
+	width: 476px;
+	height: 28px;
+	border: 1px solid #080808;
+	border-radius: 5px;
+	padding: 0px 12px;
+	font-size: 16px;
+	background-color: #f3f3f3;
+}
+.gat_input>input::-webkit-input-placeholder {
+	color: #31313;
+}
+.belong_input{
+	height: 32px;
+	width: 200px;
+	margin-top: 8px;
+	display: flex;
+	justify-content: space-between;
+}
+.shouzhi_input{
+}
+.inform{
+	margin-bottom: 20px;
+	padding-left: 2em;
+}
+.text1{
+	width: 100px;
+}
+.text2{
+	color: #00487B;
+	text-indent: 1em;
+	font-size: 22px;
+	padding: 12px 0;
+	margin: 22px 0;
+	border-bottom: 1px solid grey;
+}
+.btn{
+	width: 100px;
+	height: 30px;
+	position: relative;
+	left: 870px;
+
+}
