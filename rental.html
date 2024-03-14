@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .planner-button {
+            width: 100%;
+            background-color: #5d8c40;
+            color: #FFFFFF;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .planner-panel {
+            position: fixed;
+            top: 10%;
+            bottom: 10%;
+            left: 10%;
+            right: 10%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .planner-content {
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .close-planner-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 1000;
+        }
+
+        .planner-filters {
+            flex: 1;
+            padding-right: 10px;
+            border-right: 1px solid #ccc;
+        }
+
+        .planner-info {
+            flex: 2;
+            padding-left: 10px;
+        }
+
+        .planner-panel-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 998;
+        }
+
+        .planner {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+        }
+
+        .planner-avatar {
+            flex: 1;
+            height: 50px;
+        }
+
+        .planner.selected {
+            border-color: #5d8c40;
+        }
+
+        .planner-introduction {
+            flex: 3;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .planner-price {
+            flex: 1;
+        }
+
+        .select-planner-button {
+            background-color: #5d8c40;
+            color: #FFFFFF;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .planner-details {
+            flex: 3;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .planner-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .planner-display {
+            position: absolute;
+            bottom: 5px;
+            width: 50%;
+        }
+        .planner-panel-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 998;
+        }
+
+    </style>
+</head>
+<body>
+    <form>
+        <h2>租赁场地申请表</h2>
+
+        <label for="name">姓名:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">电子邮件:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">电话号码:</label><br>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="date">租赁日期:</label><br>
+        <input type="date" id="date" name="date" required><br>
+
+        <label for="time">租赁时间:</label><br>
+        <input type="time" id="time" name="time" required><br>
+
+        <label for="duration">租赁时长:</label><br>
+        <input type="number" id="duration" name="duration" min="1" max="24" placeholder="小时" required><br>
+
+        <label for="venue">租赁场地:</label><br>
+        <select id="venue" name="venue" required>
+            <option value="venue1">场地1</option>
+            <option value="venue2">场地2</option>
+            <!-- 添加更多场地选项 -->
+        </select><br>
+
+        <div class="planner-button">选择策划人</div>
+
+        <div class="planner-panel">
+            <div class="close-planner-button">x</div>
+            <div class="planner-content">
+                <!-- 在这里添加策划人的筛选面板 -->
+            </div>
+        </div>
+
+        <label for="purpose">租赁目的:</label><br>
+        <textarea id="purpose" name="purpose" required></textarea><br>
+
+        <input type="submit" value="提交">
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".planner-button").click(function() {
+                $(".planner-panel").show();
+                $(".planner-panel-background").show(); // 显示黑色背景
+            });
+        
+            $(".close-planner-button").click(function() {
+                $(".planner-panel").hide();
+                $(".planner-panel-background").hide(); // 隐藏黑色背景
+            });
+        });
+
+    </script>
+</body>
+</html>

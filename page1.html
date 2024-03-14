@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>填写_表单</title>
+		<link rel="stylesheet" href="css/input.css" />
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				background-color: #f5f5f5;
+			}
+			.tex_main {
+				margin: 0 auto;
+				margin-top: 30px;
+				width: 1000px;
+				align-items: center;
+				border-radius: 20px;
+				background: #fff;
+			}
+		</style>
+        <script type="text/javascript">
+            window.onload = function(){
+                getCountries();
+            }
+            var a=2;
+            function sendTaxDeclaration() {
+                
+                var userId = a++;
+                // 获取表单数据
+                let countryId = document.getElementById('countryType').value;
+                let taxTypeId = document.getElementById('userType').value;
+                let declarationPeriod = new Date().toISOString().split('T')[0];
+
+                let income = document.getElementById('income').value;
+                let expense = document.getElementById('outcome').value;
+            
+                // 创建请求体
+                let requestBody = new URLSearchParams();
+                requestBody.append('id', userId);
+                requestBody.append('CountryID', countryId);
+                requestBody.append('TaxTypeID', taxTypeId);
+                requestBody.append('DeclarationPeriod', declarationPeriod);
+                requestBody.append('Income', income);
+                requestBody.append('Expense', expense);
+            
+                // 发送POST请求
+                fetch('http://localhost:8080/TheEU/taxDeclaration', {
+                    method: 'POST',
+                    body: requestBody
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('taxDeclaration is OK!');
+                        window.location.href="tex_select.html";
+                        return response.text();
+                    } else {
+                        throw new Error('Server response wasn\'t OK');
+                    }
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            function getCountries() {
+                // 发送GET请求
+                fetch('http://localhost:8080/TheEU/country', {
+                    method: 'GET'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Country is OK!');
+                        return response.text();
+                    } else {
+                        throw new Error('Server response wasn\'t OK');
+                    }
+                })
+                .then(data => {
+                    // 将响应体中的数据分割成一个数组
+                    let countries = data.split(',');
+            
+                    // 获取下拉框元素
+                    let select = document.getElementById('countryType');
+            
+                    // 清空下拉框
+                    select.innerHTML = '';
+            
+                    // 将每个国家添加到下拉框中
+                    for (let country of countries) {
+                        let option = document.createElement('option');
+                        option.text = country;
+                        option.value = country;
+                        select.add(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            function getTaxTypes() {
+                // 获取选中的国家名称
+                let countryName = document.getElementById('countryType').value;
+            
+                // 如果国家名称为空，不发送请求
+                if (!countryName) {
+                    console.log('Country name is empty. Not sending request.');
+                    return;
+                }
+            
+                // 发送GET请求
+                fetch('http://localhost:8080/TheEU/taxType?countryName=' + countryName, {
+                    method: 'GET'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Server response wasn\'t OK');
+                    }
+                })
+                .then(data => {
+                    // 将响应体中的数据分割成一个数组
+                    let taxTypes = data.split(',');
+            
+                    // 获取下拉框元素
+                    let select = document.getElementById('userType');
+            
+                    // 清空下拉框
+                    select.innerHTML = '';
+            
+                    // 将每个税种添加到下拉框中
+                    for (let taxType of taxTypes) {
+                        let option = document.createElement('option');
+                        option.text = taxType;
+                        option.value = taxType;
+                        select.add(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+
+        </script>
+	</head>
+
+	<body>
+		<div class="tex_main">
+			<div class="headt">
+				<div class="heatext">创建新表单></div>
+			</div>
+			<form name="get_resigter" method="get" onsubmit="return checkReg()">
+				<div class="detl">
+	                <div class="text2">国家：</div>
+					<div class="inform">
+		                <div>
+		                  <select id="countryType" onchange="getTaxTypes();">
+                              <!-- <option values="1">中国</option>
+                              <option values="2">美国</option> -->
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="text2">税种：</div>
+					<div class="inform">
+		                <div>
+		                  <select id="userType" >
+                              <!-- <option values="1">企业税</option>
+                              <option values="2">增值税</option> -->
+		                  </select>
+							<div class="belong_input">
+			                  <div><input type="radio" name="belong" value="person" />个人</div>
+			                  <div><input type="radio" name="belong" value="company" />企业</div>
+							</div>
+		                </div>
+		           </div>
+					<div class="shouzhi_input">
+						<div class="text2">近一季度：</div>
+						<div class="inform">收入：<input type="text" id="income" placeholder="" required>
+						支出：<input type="text" id="outcome" placeholder="" required></div>
+					</div>
+					
+					<div class="file_input">
+						<div class="text2">证明材料：</div>
+						<div class="inform"><input type="file" name="file" /></div>
+					</div>
+					<div class="text2">相关申报信息：</div>
+					<div class="inform">
+						<div class="gat_input">
+							<div class="text1">联系人：</div>
+							<input type="text" name="lianxi" placeholder="请输入联系人姓名" required>
+						</div>
+						<div class="gat_input">
+							<div class="text1">联系方式：</div>
+							<input type="text" name="phone" placeholder="请输入手机号" required>
+						</div>
+						<div class="gat_input">
+							<div class="text1">邮箱：</div>
+							<input type="text" name="youxiang" placeholder="请输入邮箱" required>
+						</div>
+					</div>
+						
+				</div>
+				
+			</form>
+			<div style="width: 100%;height:40px;margin-bottom: 10px;border-top:1px solid #00487B;padding: 12px 0;">
+				<input class="btn" type="button" onclick="sendTaxDeclaration()" value="确定申报"/>
+			</div>
+		</div>
+	</body>
+
+</html>

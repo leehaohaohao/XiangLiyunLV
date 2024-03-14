@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <title>乡村社区</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
         <style>
             body {
-                background-color: #F5F5DC;
-                /* 米色 */
+            	margin:0;
+                background-color: #fafafa;
             }
 
             .community-nav {
-                display: flex;
-                justify-content: space-around;
-                background-color: #556B2F;
+            	display: flex;
+            	text-align: center;
+                background-color: #9eac85;
+                
                 /* 深橄榄绿 */
                 color: #F5F5DC;
                 /* 米色 */
@@ -18,12 +23,13 @@
             }
 
             .community-nav div {
+            	flex: 1;
                 padding: 10px;
                 cursor: pointer;
             }
 
             .community-nav .selected {
-                background-color: #8FBC8F;
+                background-color: #6d9b6d;
                 /* 深海绿 */
             }
 
@@ -42,7 +48,8 @@
                 /* 添加内边距 */
                 margin-bottom: 10px;
                 /* 添加外边距 */
-                background-color: #F0E68C;
+                background-color: #fafafa;
+            	box-shadow: 0 8px 8px rgb(0,0,0,0.2);
                 /* 卡其色 */
                 border: 1px solid #556B2F;
                 /* 深橄榄绿 */
@@ -75,7 +82,15 @@
                 margin-right: 10px;
                 cursor: pointer;
             }
-
+			
+			#menu{
+            	background-color: #eceeb6;
+            	height: 80px;
+            	padding-left:80px ;
+            	box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+            	position: relative;
+            	z-index: 10;
+			}
             .actions .liked {
                 color: #FF4500;
                 /* 橙红色 */
@@ -100,12 +115,13 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
                 display: none;
-                background-color: #F0E68C;
+                border-radius: 20px;
+                background-color: #e6e7e2;
                 /* 卡其色 */
                 border: 1px solid #556B2F;
                 /* 深橄榄绿 */
-                padding: 20px;
-
+                padding: 40px;
+				z-index: 11;
                 width: 80%;
                 height: 80%;
                 overflow: auto;
@@ -201,7 +217,7 @@
                 color: #888;
             }
         </style>
-        <script>
+        <script type="text/javascript">
             function enterPrivateCommunity() {
                 var code = prompt("请输入私人社区号码：");
                 if (code == "111") {
@@ -326,6 +342,7 @@
         </script>
     </head>
     <body>
+    	<div id="menu"><img src="img/community-LOGO.png"></div>
         <div class="community-nav">
             <div id="private-community" onclick="enterPrivateCommunity()">私人社区</div>
             <div id="public-community" class="selected" onclick="enterPublicCommunity()">公开社区</div>
@@ -335,7 +352,7 @@
                 <div class="avatar"></div>
                 <div class="post-content">
                     <h2>张三</h2>
-                    <p class="post-text">这是张三在公开社区发布的一些文本内容。</p>
+                    <p class="post-text">那个潜江小龙虾真的嘎嘎好吃，我强烈推荐大家多买一点。</p>
                     <div class="actions">
                         <span class="action" onclick="toggleLike(event)">点赞</span>
                         <span class="action" onclick="toggleFavorite(event)">收藏</span>
@@ -347,7 +364,7 @@
                 <div class="avatar"></div>
                 <div class="post-content">
                     <h2>李四</h2>
-                    <p class="post-text">这是李四在公开社区发布的一些文本内容。</p>
+                    <p class="post-text">安徽小岗村好好玩，不愧是写在历史书上的村庄！。</p>
                     <div class="actions">
                         <span class="action" onclick="toggleLike(event)">点赞</span>
                         <span class="action" onclick="toggleFavorite(event)">收藏</span>
@@ -359,7 +376,6 @@
                 <div class="avatar"></div>
                 <div class="post-content">
                     <h2>农业新闻</h2>
-                    <img src="农业新闻图片的URL" alt="农业新闻图片">
                     <p class="post-text">
                         近日，我国农业科研人员成功研发出一种新型的抗旱水稻品种。这种水稻在干旱条件下也能正常生长，对我国农业生产具有重要意义。据悉，这种水稻将在未来几年内推广到全国各地，有望极大提高我国农业生产效率和粮食产量。
                     </p>
@@ -377,7 +393,7 @@
                 <div class="avatar"></div>
                 <div class="post-content">
                     <h2>王五</h2>
-                    <p class="post-text">这是王五在私人社区发布的一些文本内容。</p>
+                    <p class="post-text">亲朋好友们，有没有推荐玩的地方啊！</p>
                     <div class="actions">
                         <span class="action" onclick="toggleLike(event)">点赞</span>
                         <span class="action" onclick="toggleFavorite(event)">收藏</span>
@@ -389,7 +405,7 @@
                 <div class="avatar"></div>
                 <div class="post-content">
                     <h2>赵六</h2>
-                    <p class="post-text">这是赵六在私人社区发布的一些文本内容。</p>
+                    <p class="post-text">大家这个月的收成怎么样啊？哈哈，我这个月的业绩可是超标了。</p>
                     <div class="actions">
                         <span class="action" onclick="toggleLike(event)">点赞</span>
                         <span class="action" onclick="toggleFavorite(event)">收藏</span>

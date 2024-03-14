@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <title>个人小屋</title>
+        <style>
+                body,html{
+                    width:100%;
+                    height:100%;
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #e7d9aa;
+                }
+                .navbar {
+                    width: 100%;
+                    height: 90px;
+                    background-color: #eceeb6; /* 修改这里 */
+                    color: white;
+                    box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+                }
+                .sidebar {
+                    width: 150px;
+                    position: fixed;
+                    top: 90px;
+                    height: calc(100% - 90px);
+                    background-color: #a5cb83; /* 修改这里 */
+                    color: white;
+                    padding: 10px;
+                }
+                .content {
+                    margin-left: 170px;
+                    padding: 10px;
+                }
+                .sidebar a {
+                    display: block;
+                    padding: 10px;
+                    text-decoration: none;
+                    background-color: #7a9b88; /* 修改这里 */
+                    color: white;
+                    margin-bottom: 10px;
+                }
+                .sidebar a.active {
+                    background-color: #5a7557; /* 修改这里 */
+                }
+                .box {
+                    border: 1px solid #ddd;
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    background-color: #f4f4f4; /* 修改这里 */
+                }
+                .box img {
+                    width: 100px;
+                    height: 100px;
+                }
+            </style>
+    </head>
+    <body onload="showInfo();">
+        <div class="navbar" style="padding-left:40px ;display: block;">
+            <img src="img/indiviudality-LOGO.png">
+        </div>
+        <div class="sidebar">
+            <h1>个人小屋</h1>
+            <a href="#" id="infoLink" onclick="showInfo(); return false;">个人信息</a>
+            <a href="#" id="ordersLink" onclick="showOrders(); return false;">订单查询</a>
+            <a href="#" id="accommodationLink" onclick="showAccommodation(); return false;">历史住宿</a>
+            <a href="#" id="attractionsLink" onclick="showAttractions(); return false;">历史景点</a>
+            <a href="#" id="favoritesLink" onclick="showFavorites(); return false;">我的收藏</a>
+            <a href="#" id="scheduleLink" onclick="showSchedule(); return false;">我的日程</a>
+
+        </div>
+        <div class="content" id="content">
+            <!-- 这里将显示个人信息、订单查询或攻略分享的内容 -->
+        </div>
+
+        <script>
+            function removeActiveClass() {
+                
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('accommodationLink').classList.remove('active');
+                document.getElementById('attractionsLink').classList.remove('active');
+                document.getElementById('favoritesLink').classList.remove('active');
+                document.getElementById('scheduleLink').classList.remove('active');
+            }
+
+            function showInfo() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                <div class="box">
+                    <h2>个人信息</h2>
+                    <p>姓名：张三</p>
+                    <p>邮箱：zhangsan@example.com</p>
+                    <p>电话：198XXXXXXXX</p>
+                    <p>地址：浙江省杭州市XXXX</p>
+                    <!-- 这里可以添加更多的个人信息 -->
+                </div>
+            `;
+                document.getElementById('infoLink').classList.add('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('guideLink').classList.remove('active');
+                document.getElementById('infoLink').classList.add('active');
+            }
+
+            function showOrders() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                            <div class="box">
+                                <h2>订单#123</h2>
+                                <p>商品名称：潜江小龙虾</p>
+                                <p>数量：5斤</p>
+                                <p>购买时间：2024-03-11 19:10:43</p>
+                                <p>预计到达时间：还有3天</p>
+                                <!-- 这里可以添加更多的订单信息 -->
+                            </div>
+                            <div class="box">
+                                <h2>订单#124</h2>
+                                <p>商品名称：延安苹果</p>
+                                <p>数量：1筐</p>
+                                <p>购买时间：2024-03-12 20:15:30</p>
+                                <p>预计到达时间：还有2天</p>
+                                <!-- 这里可以添加更多的订单信息 -->
+                            </div>
+                            <div class="box">
+                                <h2>订单#125</h2>
+                                <p>商品名称：延安苹果</p>
+                                <p>数量：2筐</p>
+                                <p>购买时间：2024-03-12 20:15:30</p>
+                                <p>预计到达时间：还有2天</p>
+                                <!-- 这里可以添加更多的订单信息 -->
+                            </div>
+                        `;
+                document.getElementById('ordersLink').classList.add('active');
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('guideLink').classList.remove('active');
+                document.getElementById('ordersLink').classList.add('active');
+            }
+
+            function showAccommodation() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                             <div class="box">
+                                 <h2>历史住宿#1</h2>
+                                 <p>酒店名称：北京现代风格民宿</p>
+                                 <p>入住时间：2024-03-11</p>
+                                 <p>退房时间：2024-03-13</p>
+                                 <!-- 这里可以添加更多的历史住宿信息 -->
+                             </div>
+                             <div class="box">
+                                 <h2>历史住宿#2</h2>
+                                 <p>酒店名称：上海传统风格民宿</p>
+                                 <p>入住时间：2024-03-14</p>
+                                 <p>退房时间：2024-03-16</p>
+                                 <!-- 这里可以添加更多的历史住宿信息 -->
+                             </div>
+                             <div class="box">
+                                 <h2>历史住宿#3</h2>
+                                 <p>酒店名称：四川大熊猫民宿</p>
+                                 <p>入住时间：2024-03-17</p>
+                                 <p>退房时间：2024-03-19</p>
+                                 <!-- 这里可以添加更多的历史住宿信息 -->
+                             </div>
+                             
+                         `;
+                document.getElementById('accommodationLink').classList.add('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('attractionsLink').classList.remove('active');
+                document.getElementById('guideLink').classList.remove('active');
+                document.getElementById('accommodationLink').classList.add('active');
+            }
+
+            function showAttractions() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                             <div class="box">
+                                 <h2>历史景点#1</h2>
+                                 <p>景点名称：扬州瘦西湖</p>
+                                 <p>导游信息：无</p>
+                                 <p>参观时间：2024-03-11</p>
+                                 <!-- 这里可以添加更多的历史景点信息 -->
+                             </div>
+                             <div class="box">
+                                 <h2>历史景点#2</h2>
+                                 <p>景点名称：杭州龙井茶园</p>
+                                 <p>导游信息：李四</p>
+                                 <p>参观时间：2024-03-14</p>
+                                 <!-- 这里可以添加更多的历史景点信息 -->
+                             </div>
+                             <div class="box">
+                                 <h2>历史景点#3</h2>
+                                 <p>景点名称：松庄村</p>
+                                 <p>导游信息：无</p>
+                                 <p>参观时间：2024-03-18</p>
+                                 <!-- 这里可以添加更多的历史景点信息 -->
+                             </div>
+                         `;
+                document.getElementById('attractionsLink').classList.add('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('accommodationLink').classList.remove('active');
+                document.getElementById('guideLink').classList.remove('active');
+                document.getElementById('attractionsLink').classList.add('active');
+            }
+
+            function showFavorites() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                    <div class="box">
+                        <h2>我的收藏#1</h2>
+                        <p>商品名称：潜江小龙虾</p>
+                        <p>收藏时间：2024-03-11</p>
+                        <!-- 这里可以添加更多的收藏信息 -->
+                    </div>
+                    <div class="box">
+                        <h2>我的收藏#2</h2>
+                        <p>文章标题：如何烹饪美味的小龙虾</p>
+                        <p>收藏时间：2024-03-14</p>
+                        <!-- 这里可以添加更多的收藏信息 -->
+                    </div>
+                    <div class="box">
+                        <h2>我的收藏#3</h2>
+                        <p>视频标题：小龙虾烹饪教程</p>
+                        <p>收藏时间：2024-03-18</p>
+                        <!-- 这里可以添加更多的收藏信息 -->
+                    </div>
+                `;
+                document.getElementById('favoritesLink').classList.add('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('favoritesLink').classList.add('active');
+            }
+            function showSchedule() {
+                removeActiveClass();
+                document.getElementById('content').innerHTML = `
+                    <div class="box">
+                        <h2>我的日程#1</h2>
+                        <p>事件：黄山景点（跟团游览）</p>
+                        <p>出行方式：飞机（2024-04-11 10:00）</p>
+                        <p>时间：2024-04-11 20:00</p>
+                        <!-- 这里可以添加更多的日程信息 -->
+                    </div>
+                    <div class="box">
+                        <h2>我的日程#2</h2>
+                        <p>事件：松庄</p>
+                        <p>出行方式：自驾游</p>
+                        <p>时间：2024-04-14 10:00</p>
+                        <!-- 这里可以添加更多的日程信息 -->
+                    </div>
+                    <div class="box">
+                        <h2>我的日程#3</h2>
+                        <p>事件：杭州市龙井茶园</p>
+                        <p>出行方式：高铁（2024-04-18 10:00）</p>
+                        <p>时间：2024-04-18 18:00</p>
+                        <!-- 这里可以添加更多的日程信息 -->
+                    </div>
+                `;
+                document.getElementById('scheduleLink').classList.add('active');
+                document.getElementById('ordersLink').classList.remove('active');
+                document.getElementById('infoLink').classList.remove('active');
+                document.getElementById('scheduleLink').classList.add('active');
+            }
+
+        </script>
+    </body>
+</html>

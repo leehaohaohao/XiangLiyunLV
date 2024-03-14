@@ -1,4 +1,8 @@
 <html>
+	<title>民宿酒店</title>
+	<meta charset="utf-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <head>
         <style>
             body {
@@ -6,7 +10,14 @@
                 font-family: Arial, sans-serif;
                 background-color: #edeeb5;
             }
-
+			.menu{
+            	background-color: #eceeb6;
+            	height: 80px;
+            	padding-left:80px ;
+            	box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+            	position: relative;
+            	z-index: 10;
+			}
             .slider {
                 width: 100%;
                 height: 500px;
@@ -88,6 +99,7 @@
         </style>
     </head>
     <body>
+    	<div class="menu"><img src="img/loging-LOGO.png"> </div>
         <div class="slider">
             <img src="img/minsu1.jpg" alt="民宿1">
             <img src="img/minsu2.jpg" alt="民宿2">
@@ -119,37 +131,37 @@
             <button>查询</button>
         </div>
         <div class="list">
-            <div class="list-item" data-area="beijing" data-type="modern" data-price="medium">
+            <div class="list-item" data-area="beijing" data-type="modern" data-price="medium" data-url="minsu.html">
                 <img src="img/minsu1.jpg" alt="民宿1">
                 <h3>北京现代风格民宿</h3>
                 <p>这是一家位于北京的现代风格民宿，提供舒适的住宿环境和便利的设施。</p>
             </div>
-            <div class="list-item" data-area="shanghai" data-type="traditional" data-price="high">
+            <div class="list-item" data-area="shanghai" data-type="traditional" data-price="high" data-url="minsu.html">
                 <img src="img/minsu2.jpg" alt="民宿2">
                 <h3>上海传统风格民宿</h3>
                 <p>这是一家位于上海的传统风格民宿，拥有独特的装饰和优雅的氛围。</p>
             </div>
-            <div class="list-item" data-area="guangzhou" data-type="nature" data-price="low">
+            <div class="list-item" data-area="guangzhou" data-type="nature" data-price="low" data-url="minsu.html">
                 <img src="img/minsu3.jpg" alt="民宿3">
                 <h3>广州自然风格民宿</h3>
                 <p>这是一家位于广州的自然风格民宿，周围环境优美，是您放松身心的好去处。</p>
             </div>
-            <div class="list-item" data-area="sichuan" data-type="nature" data-price="low">
+            <div class="list-item" data-area="sichuan" data-type="nature" data-price="low" data-url="minsu.html">
                 <img src="img/minsu4.jpg" alt="民宿4">
                 <h3>四川大熊猫民宿</h3>
                 <p>这是一家位于四川的自然风格民宿，周围环境优美，是您放松身心的好去处。</p>
             </div>
-            <div class="list-item" data-area="yunnan" data-type="traditional" data-price="high">
+            <div class="list-item" data-area="yunnan" data-type="traditional" data-price="high" data-url="minsu.html">
                 <img src="img/minsu5.jpg" alt="民宿5">
                 <h3>云南古城民宿</h3>
                 <p>这是一家位于云南的传统风格民宿，拥有独特的装饰和优雅的氛围。</p>
             </div>
-            <div class="list-item" data-area="guizhou" data-type="modern" data-price="medium">
+            <div class="list-item" data-area="guizhou" data-type="modern" data-price="medium" data-url="minsu.html">
                 <img src="img/hotel1.jpg" alt="酒店1">
                 <h3>贵州山水酒店</h3>
                 <p>这是一家位于贵州的现代风格酒店，提供舒适的住宿环境和便利的设施。</p>
             </div>
-            <div class="list-item" data-area="zhejiang" data-type="luxury" data-price="high">
+            <div class="list-item" data-area="zhejiang" data-type="luxury" data-price="high" data-url="minsu.html">
                 <img src="img/hotel2.jpg" alt="酒店2">
                 <h3>浙江湖边豪华酒店</h3>
                 <p>这是一家位于浙江的豪华风格酒店，拥有一流的设施和优质的服务。</p>
@@ -171,7 +183,10 @@
                         index = 0;
                     }
                 }
-
+                $(".list-item").click(function() {
+                            var url = $(this).data("url"); // 获取景点的URL
+                            window.open(url, "_blank"); // 打开新的页面
+                        });
                 switchImage();
                 setInterval(switchImage, interval);
                 $("button").click(function() {

@@ -1,4 +1,8 @@
 <html>
+    <meta charset="UTF-8">
+    <title>景点参观</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <head>
         <style>
             body {
@@ -26,7 +30,15 @@
                 justify-content: space-between;
                 align-items: center;
             }
-
+			
+			#menu{
+            	background-color: #eceeb6;
+            	height: 80px;
+            	padding-left:80px ;
+            	box-shadow: 0 8px 8px rgb(0,0,0,0.2);
+            	position: relative;
+            	z-index: 10;
+			}
             .form select {
                 width: 20%;
                 height: 40px;
@@ -92,6 +104,7 @@
         </style>
     </head>
     <body>
+    	<div id="menu"><img src="img/scening-LOGO.png"></div>
         <div class="slider">
             <img src="img/huangshan.jpg" alt="黄山">
             <img src="img/shouxihu.jpg" alt="扬州瘦西湖">
@@ -126,6 +139,11 @@
                 <option value="weekend">周末游</option>
                 <option value="long_vacation">长假游</option>
             </select>
+            <select name="rental">
+                <option value="all">全部</option>
+                <option value="rentable">可租赁</option>
+            </select>
+
             <button>查询</button>
         </div>
         <div class="list">
@@ -149,6 +167,27 @@
                 <h3>杭州龙井茶园</h3>
                 <div class="list-item-text">
                     <p>杭州龙井茶园是中国最著名的茶叶产地之一，以生产龙井茶而闻名，是游客体验茶文化和品尝茶艺的好去处。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="zhejiang" data-preference="nature" data-budget="medium" data-duration="long_vacation" data-rental="rentable" data-url="songzhuang.html">
+                <img src="img/songzhuang.jpg" alt="松庄村">
+                <h3>松庄村</h3>
+                <div class="list-item-text">
+                    <p>松庄村位于江南最后的秘境，是800-1200年之间的小众古村。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="yunnan" data-preference="history" data-budget="high" data-duration="long_vacation" data-rental="rentable" data-url="songzhuang.html">
+                <img src="img/baisha.jpg" alt="白沙古镇">
+                <h3>白沙古镇</h3>
+                <div class="list-item-text">
+                    <p>白沙古镇位于玉龙雪山下的千年古镇。</p>
+                </div>
+            </div>
+            <div class="list-item" data-area="zhejiang" data-preference="nature" data-budget="low" data-duration="day_trip" data-rental="rentable" data-url="songzhuang.html">
+                <img src="img/kucun.jpg" alt="库村">
+                <h3>库村</h3>
+                <div class="list-item-text">
+                    <p>库村是用鹅卵石堆砌的村庄，位于温州泰顺县。</p>
                 </div>
             </div>
             <div class="list-item" data-area="sichuan" data-preference="rural_culture" data-budget="medium"
@@ -199,6 +238,8 @@
                     var area = $("select[name='area']").val();
                     var preference = $("select[name='preference']").val();
                     var budget = $("select[name='budget']").val();
+                    var duration = $("select[name='duration']").val(); // 获取用户选择的租赁选项
+                    var rental = $("select[name='rental']").val(); // 获取用户选择的租赁选项
 
                     $(".list-item").hide(); // 首先隐藏所有景点
 
@@ -206,10 +247,12 @@
                         var itemArea = $(this).data("area");
                         var itemPreference = $(this).data("preference");
                         var itemBudget = $(this).data("budget");
+                        var itemDuration = $(this).data("duration");
+                        var itemRental = $(this).data("rental");
 
                         if ((area == "all" || area == itemArea) &&
                             (preference == "all" || preference == itemPreference) &&
-                            (budget == "all" || budget == itemBudget)) {
+                            (budget == "all" || budget == itemBudget) && (duration == "all" || duration == itemDuration) && (rental == "all" || rental == itemRental)) {
                             $(this).show(); // 如果景点符合筛选条件，则显示
                         }
                     });

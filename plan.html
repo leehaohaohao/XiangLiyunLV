@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<title>行程规划</title>
-	<meta charset="utf-8">
+    <title>行程规划</title>
+    <meta charset="utf-8">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="stylesheet" type="text/css" href="css/index_page.css">
     <head>
         <style>
-            body,html
-            {
+            body,
+            html {
                 height: 100%;
                 margin: 0;
-                background-color: #eaf1ec;/* 褐色，象征土壤和木材 */
+                background-color: #eaf1ec;
+                /* 褐色，象征土壤和木材 */
             }
 
             .container {
@@ -39,11 +40,13 @@
 
             .route-planner {
                 position: relative;
-                background-color: #fff; /* 卡其色，象征稻草和谷物 */
+                background-color: #fff;
+                /* 卡其色，象征稻草和谷物 */
             }
 
             .attraction-selector {
-                background-color:#e4f6d1; /* 森林绿，象征自然和绿色植物 */
+                background-color: #e4f6d1;
+                /* 森林绿，象征自然和绿色植物 */
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
@@ -61,19 +64,7 @@
                 flex: 1;
             }
 
-            .filter-button {
-                width: 50px;
-                background-color: #5d8c40; /* 橄榄色，象征自然和和平 */
-                color: #FFFFFF; /* 白色，提供对比，确保文本可读 */
-                margin-right: 20px;
-                padding: 10px;
-                border-radius: 10px;
-                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
-                writing-mode: vertical-rl;
-                text-align: center;
-                height: 100%;
-                cursor: pointer;
-            }
+
 
 
             .filter-panel {
@@ -131,20 +122,22 @@
                 font-weight: bold;
             }
 
-            .high-speed-rail {
+            .high-speed-rail1 {
                 background-image: url(img/travel_road1.png);
             }
 
-            .airplane {
+            .airplane1 {
                 background-image: url(img/travel_road4.png);
             }
 
-            .train {
+            .train1 {
                 background-image: url(img/travel_road3.png);
             }
-			.rail{
+
+            .rail1 {
                 background-image: url(img/travel_road2.png);
-			}
+            }
+
             .checkbox {
                 position: absolute;
                 top: 0;
@@ -185,6 +178,7 @@
                 font-size: 20px;
                 z-index: 1000;
             }
+
 
             .filter-category {
                 display: flex;
@@ -242,19 +236,235 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
+
+            .filter-button {
+                width: 50px;
+                background-color: #5d8c40;
+                /* 橄榄色，象征自然和和平 */
+                color: #FFFFFF;
+                /* 白色，提供对比，确保文本可读 */
+                margin-right: 20px;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+                writing-mode: vertical-rl;
+                text-align: center;
+                height: 90%;
+                cursor: pointer;
+            }
+
+            .guide-button {
+                width: 50px;
+                background-color: #5d8c40;
+                /* 橄榄色，象征自然和和平 */
+                color: #FFFFFF;
+                /* 白色，提供对比，确保文本可读 */
+                margin-right: 20px;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+                writing-mode: vertical-rl;
+                text-align: center;
+                height: 90%;
+                cursor: pointer;
+            }
+
+            .guide-panel {
+                position: fixed;
+                top: 10%;
+                bottom: 10%;
+                left: 10%;
+                right: 10%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+                border-radius: 10px;
+                justify-content: center;
+                align-items: center;
+                z-index: 10;
+            }
+
+            .guide-content {
+                display: flex;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 999;
+                width: 100%;
+                height: 100%;
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .close-guide-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                background-color: #ffffff;
+                border-radius: 50%;
+                text-align: center;
+                cursor: pointer;
+                font-size: 20px;
+                z-index: 1000;
+            }
+
+            .guide-filters {
+                flex: 1;
+                padding-right: 10px;
+                border-right: 1px solid #ccc;
+            }
+
+            .guide-info {
+                flex: 2;
+                padding-left: 10px;
+            }
+
+            .guide-panel-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+                z-index: 998;
+            }
+
+            .guide {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                border: 2px solid transparent;
+                /* 添加这一行来预留边框空间 */
+            }
+
+            .guide-avatar {
+                flex: 1;
+                height: 50px;
+            }
+
+            .guide.selected {
+                border-color: #5d8c40;
+                /* 当导游被选中时，边框颜色变为橄榄色 */
+            }
+
+            .guide-introduction {
+                flex: 3;
+                font-size: 16px;
+                padding: 0 10px;
+            }
+
+            .guide-price {
+                flex: 1;
+            }
+
+            .select-guide-button {
+                background-color: #5d8c40;
+                /* 橄榄色，象征自然和和平 */
+                color: #FFFFFF;
+                /* 白色，提供对比，确保文本可读 */
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                width: 200px;
+            }
+
+            .guide-details {
+                flex: 3;
+                padding: 0 10px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .guide-name {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .guide-display {
+                position: absolute;
+                /* 设置绝对定位 */
+                bottom: 5px;
+                /* 固定在底部 */
+                width: 50%;
+                /* 宽度为100% */
+            }
+
+            .date {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #f0f0f0;
+                /* 浅色背景 */
+                color: #000000;
+                /* 黑色文字 */
+            }
+
+            .year,
+            .day {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .weather,
+            .travel-mode,
+            .attraction {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                width: 100px;
+                height: 100px;
+                margin: 10px;
+                border-radius: 10px;
+                color: #ffffff;
+                font-weight: bold;
+                background-size: cover;
+                /* 新增这一行来确保背景图片填充整个元素 */
+            }
+
+            .weather {
+                background-image: url('img/sun.jpg');
+                /* 使用您的天气图片 */
+            }
+
+            .high-speed-rail {
+                background-image: url('img/railway.jpg');
+                /* 使用您的高铁图片 */
+            }
+
+            .airplane {
+                background-image: url('img/plane.jpg');
+                /* 使用您的飞机图片 */
+            }
+
+            .train {
+                background-image: url('img/train.jpg');
+                /* 使用您的火车图片 */
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     </head>
     <body>
-		<div class="menu" style="padding-left:40px ;display: block;">
-			<img src="img/planing-LOGO.png">
-		</div>
+        <div class="menu" style="padding-left:40px ;display: block;">
+            <img src="img/planing-LOGO.png">
+        </div>
         <div class="container">
             <div class="route-planner">
                 <div class="route">
                     <div class="location">当前位置</div>
                     <button class="export-button">导出为PNG</button>
+                </div>
+                <div class="guide-display">
+                    <!-- 在这里显示选择的导游信息 -->
                 </div>
             </div>
             <div class="attraction-selector">
@@ -262,29 +472,78 @@
                     筛选
                 </div>
                 <div class="attractions">
-                    <div class="attraction high-speed-rail" data-region="东部" data-economy="经济发达" data-history="有历史遗迹"
+                    <div class="attraction high-speed-rail1" data-region="东部" data-economy="经济发达" data-history="有历史遗迹"
                         data-culture="有地方特色" data-nature="有自然景观" data-climate="热带" data-population="人口密集">
                         <div class="checkbox"></div>
                         <div>XX山景点</div>
                     </div>
-                    <div class="attraction airplane" data-region="西部" data-economy="经济一般" data-history="无历史遗迹"
+                    <div class="attraction airplane1" data-region="西部" data-economy="经济一般" data-history="无历史遗迹"
                         data-culture="无地方特色" data-nature="无自然景观" data-climate="亚热带" data-population="人口稀少">
                         <div class="checkbox"></div>
                         <div>生态花园</div>
                     </div>
-                    <div class="attraction train" data-region="南部" data-economy="经济欠发达" data-history="历史悠久"
+                    <div class="attraction train1" data-region="南部" data-economy="经济欠发达" data-history="历史悠久"
                         data-culture="有名的节日" data-nature="有名的公园" data-climate="温带" data-population="城市">
                         <div class="checkbox"></div>
                         <div>农场</div>
                     </div>
-                    <div class="attraction rail" data-region="北部" data-economy="贫困地区" data-history="近代建立"
+                    <div class="attraction rail1" data-region="北部" data-economy="贫困地区" data-history="近代建立"
                         data-culture="无名的节日" data-nature="无名的公园" data-climate="寒带" data-population="乡村">
                         <div class="checkbox"></div>
                         <div>茶园</div>
                     </div>
                     <!-- 添加更多的.attraction div来表示更多的景点 -->
                 </div>
+                <div class="guide-button">
+                    选择导游
+                </div>
             </div>
+        </div>
+        <div class="guide-panel">
+            <div class="close-guide-button">x</div>
+            <div class="guide-content">
+                <div class="guide-filters">
+                    <div class="filter-option selected" data-filter="guide" data-value="全部">全部</div>
+                    <div class="filter-option" data-filter="guide" data-value="推荐">推荐</div>
+                    <div class="filter-option" data-filter="guide" data-value="语言能力">语言能力</div>
+                    <div class="filter-option" data-filter="guide" data-value="专业领域">专业领域</div>
+                    <div class="filter-option" data-filter="guide" data-value="服务评价">服务评价</div>
+                </div>
+                <div class="guide-info">
+                    <!-- 导游信息 -->
+                    <div class="guide">
+                        <div class="guide-avatar" style="background-color: #5d8c40;"></div>
+                        <div class="guide-details">
+                            <div class="guide-name">李四</div>
+                            <div class="guide-introduction">
+                                10年的导游经验，擅长历史和文化旅游，能流利地使用英语和法语。
+                            </div>
+                        </div>
+                        <div class="guide-price">
+                            ￥500/天
+                        </div>
+                        <button class="select-guide-button">
+                            选择
+                        </button>
+                    </div>
+                    <div class="guide">
+                        <div class="guide-avatar" style="background-color: #5d8c40;"></div>
+                        <div class="guide-details">
+                            <div class="guide-name">张三</div>
+                            <div class="guide-introduction">
+                                10年的导游经验，擅长历史和文化旅游，能流利地使用英语和法语。
+                            </div>
+                        </div>
+                        <div class="guide-price">
+                            ￥500/天
+                        </div>
+                        <button class="select-guide-button">
+                            选择
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-panel-background"></div>
         </div>
         <div class="filter-panel">
             <div class="close-button">x</div>
@@ -315,6 +574,33 @@
         </div>
         <script>
             $(document).ready(function() {
+                $('.select-guide-button').click(function() {
+                    var button = $(this);
+                    var guide = button.parent();
+                    if (guide.hasClass('selected')) {
+                        guide.removeClass('selected');
+                        button.text('选择');
+                        // 当取消选择导游时，移除路线规划中的导游信息
+                        $('.route-planner .guide-display').empty();
+                    } else {
+                        $('.guide.selected').removeClass('selected');
+                        $('.select-guide-button:contains("取消选择")').text('选择');
+                        guide.addClass('selected');
+                        button.text('取消选择');
+                        // 当选择导游时，添加导游信息到路线规划中
+                        var guideName = guide.find('.guide-name').text();
+                        var guideInfo = $('<div class="guide-info"></div>');
+                        guideInfo.text('导游：' + guideName + ' 联系方式：1234567890');
+                        $('.route-planner .guide-display').html(guideInfo);
+                    }
+                });
+
+
+                $('.guide-button, .close-guide-button').click(function() {
+                    $('.guide-panel').fadeToggle();
+                    $('.guide-panel-background').fadeToggle();
+                });
+
                 $('.export-button').click(function() {
                     $(this).hide(); // 隐藏按钮
                     html2canvas($('.route-planner')[0]).then(function(canvas) {
@@ -326,43 +612,48 @@
                     });
                 });
                 var idCounter = 0;
-                var lastDate = new Date();
+                var lastDate = new Date(); // 初始化为当前日期
+
+                function addRandomDays(date) {
+                    var daysToAdd = Math.floor(Math.random() * 3) + 1; // 随机生成1到3的整数
+                    date.setDate(date.getDate() + daysToAdd); // 在当前日期上增加随机天数
+                    return date;
+                }
                 $('.attraction .checkbox').click(function(event) {
                     event.stopPropagation();
                     var checkbox = $(this);
                     checkbox.toggleClass('checked');
                     var attraction = checkbox.parent();
-                    var travelModes = ['高铁', '飞机', '火车'];
-                    var randomTravelMode = travelModes[Math.floor(Math.random() * travelModes.length)];
-                    var weather = "晴天"; // 假设天气总是好的
                     if (checkbox.hasClass('checked')) {
                         // 如果景点被选中，添加到路线中
-                        var date = new Date(lastDate.getTime() + Math.floor(Math.random() * 4 + 1) *
-                            24 * 60 * 60 * 1000); // 随机选择未来四天内的一天
-                        lastDate = date; // 更新最后选择的日期
-                        var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date
-                            .getDate(); // 生成日期字符串
-                        attraction.attr('data-id', idCounter);
-                        $('.route').append('<div id="date-' + idCounter + '" class="date">' +
-                            dateString + '</div>');
-                        $('.route').append('<div id="weather-' + idCounter + '" class="weather">' +
-                            weather + '</div>');
-                        $('.route').append('<div id="travelmode-' + idCounter +
-                            '" class="travel-mode ' + randomTravelMode +
-                            '" style="background-color: ' + attraction.css('background-color') +
-                            ';">' + randomTravelMode + '</div>');
-                        $('.route').append('<div id="attraction-' + idCounter +
-                            '" class="attraction" style="background-color: ' + attraction.css(
-                                'background-color') + ';">' + attraction.find('div').last().text() +
-                            '</div>');
-                        idCounter++;
+                        var newAttraction = $('<div class="attraction"></div>');
+                        newAttraction.css('background-image', attraction.css(
+                        'background-image')); // 复制景点的背景图片
+
+                        var travelModes = ['high-speed-rail', 'airplane', 'train', 'rail'];
+                        var randomTravelMode = travelModes[Math.floor(Math.random() * travelModes
+                            .length)];
+                        var weather = "晴天"; // 假设天气总是好的
+
+                        lastDate = addRandomDays(lastDate); // 增加随机天数
+                        var year = lastDate.getFullYear();
+                        var day = lastDate.getDate() + '/' + (lastDate.getMonth() + 1); // 获取日期和月份
+                        $('.route').append('<div class="date"><div class="year">' + year +
+                            '</div><div class="day">' + day + '</div></div>'); // 添加日期
+                        $('.route').append('<div class="weather"></div>'); // 添加天气图片
+                        $('.route').append('<div class="travel-mode ' + randomTravelMode +
+                        '"></div>'); // 添加交通方式图片
+                        $('.route').append(newAttraction); // 将新的景点添加到路线中
                     } else {
                         // 如果景点被取消选中，从路线中移除
-                        var id = attraction.attr('data-id');
-                        $('#attraction-' + id).remove();
-                        $('#travelmode-' + id).remove();
-                        $('#weather-' + id).remove();
-                        $('#date-' + id).remove();
+                        $('.route .attraction').filter(function() {
+                            return $(this).css('background-image') === attraction.css(
+                                'background-image');
+                        }).prevAll().slice(0, 3).remove(); // 移除对应的日期、天气和交通方式
+                        $('.route .attraction').filter(function() {
+                            return $(this).css('background-image') === attraction.css(
+                                'background-image');
+                        }).remove(); // 移除景点
                     }
                 });
                 $('.attraction').click(function() {
