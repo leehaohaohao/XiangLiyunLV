@@ -1,0 +1,144 @@
+.form{
+	height: 100vh;
+	
+}
+#form1{
+	background: linear-gradient(to bottom, #a53221,#85160b);
+}
+#form2{
+	background: linear-gradient(to bottom, #335a95,#152251);
+}
+#form3{
+	background: linear-gradient(to bottom, #144b46,#0f7b6e);
+}
+.component{
+	position:absolute;
+	width: 280px;
+	height: 450px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 20px;
+	border:3px solid #efefef;
+	background-color: #237bae;
+	box-shadow: 0px 0px 20px rgb(84 84 84 / 89%);
+	transition: margin 0.5s ease;
+}
+#component4{
+	position:absolute;
+	width: 280px;
+	height: 450px;
+	display: flex;
+	border-radius: 20px;
+	background-color: #237bae;
+	box-shadow: 0px 0px 25px rgb(84 84 84 / 89%);
+	border:3px solid #efefef;
+	flex-direction: column;
+}
+#component4>p{
+	text-align: center;
+	color: #e1e1e1;
+	padding: 0 30px;
+}
+#component4>img{
+	margin: 10px auto;
+	border-radius: 5px;
+	width: 250px;
+	height:300px;
+}
+.component:hover{
+	margin: auto 80px;
+}
+.component>p{
+	text-align: center;
+	padding: 0 30px;
+	color: #e1e1e1;
+}
+.component>img{
+	border-radius: 5px;
+	margin: 10px auto;
+	width: 250px;
+	height:300px;
+}
+#rong_qi{
+	margin: 0 auto;
+	width: 900px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+#rong_qi2{
+	overflow: hidden;
+	height:100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+#textBox1{
+	position: absolute;
+	margin: 40px auto;
+	width:800px;
+	opacity: 0.1;
+	transition: opacity 2.0s ease;
+}
+h1{
+	color: white;
+	text-align: center;
+	font-size: 78px;
+}
+#maintext{
+	color: white;
+	margin-top: 30px;
+}
+#shangetext{
+	width: 500px;
+	color: white;
+	clip-path: inset( 0 50% 0 50%);
+	transition: all 1.5s ease;
+}
+
+#shangeimg{
+	opacity: 0.1;
+	transition: all 2s ease; 
+}
+#racimg1{
+	position: relative;
+	background-image: url(../img/jianzhi1.png);
+	background-repeat:no-repeat ;
+	background-size:cover;
+	width:320px;
+	height: 320px;
+    top: -200px;
+}
+#racimg2{
+	position: relative;
+	background-image: url(../img/jianzhi2.png);
+	background-repeat:no-repeat ;
+	background-size:cover; 
+    width: 430px;
+    height: 430px;
+    bottom: -660px;
+}
+#textBox2{
+	display: flex;
+	height:100%;
+	justify-content: center;
+	position: relative;
+	align-items: center;
+}
+@keyframes rotate1{
+	from{
+		transform: rotate(50deg);
+	}
+	to{
+		transform: rotate(-40deg);
+	}
+}
+@keyframes rotate2{
+	from{
+		transform: rotate(-80deg);
+	}
+	to{
+		transform: rotate(40deg);
+	}
+}
